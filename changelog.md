@@ -1,5 +1,150 @@
 # Changelog
 
+## v1.1.13
+
+### Highlights
+
+- Customize is now available to everyone, letting you browse and manage plugins, skills, MCP servers, and canvases in one place, and even create your own personal skills.
+- Pull request overviews now show and let you edit closing issues, and you can link pull requests to issues right from the header menu.
+- Azure DevOps is now available to install and open from Customize > Featured.
+- You can now toggle worktrees on or off for all repositories at once when starting a new session across a repository collection.
+- Added an opt-in setting to stabilize screen reader transcript navigation while a response streams.
+
+### Added
+
+- Added 180-day and 360-day options to the Copilot CLI session history picker in Settings.
+- Added a "Reset zoom level" action to the command palette to quickly return the app to its default zoom.
+- Added a checkbox to toggle worktrees on or off for all repositories at once when starting a new session across a repository collection.
+- Added an opt-in setting to stabilize screen reader transcript navigation while a response streams.
+- Azure DevOps is now available to install and open from Customize > Featured.
+- Customize is now available to everyone, letting you browse and manage plugins, skills, MCP servers, and canvases in one place, and create, edit, or remove your own personal skills.
+- Pull request overviews now show and let you edit closing issues; link pull requests to issues from the header overflow menu.
+
+### Changed
+
+- Alternate GitHub accounts now live in a "Switch account" submenu, keeping the account menu simpler when you have several accounts.
+- Check runs in the pull request checks panel now show elapsed or total runtime instead of relative timestamps like "just now" or "1h ago".
+- Improved canvas discovery and management in Customize: featured canvases now show clearer Install/Installing states and update automatically once installed, canvas details show provider and requirements with a New session action, and canvas context menus offer New session, View details, and provider management actions.
+- Made loading, retry, and empty-state messaging in the Customize view clearer and more consistent, and stopped background refresh indicators from shifting content.
+- Moved the client protocol and agent daemon version details from Settings > Environments to the Health check dialog.
+- Pinned sessions can now be selected and deleted in Manage sessions, just like other sessions.
+- Pull request activity feeds now show the title, status, and an actionable reference card when an issue or pull request is linked or unlinked.
+- Refined tooltip open and close animations with a smoother, snappier motion.
+- Refreshed artwork in the Customize view, adding featured card images and tailored icons for built-in canvases like the editor, browser, terminal, Word, Excel, and PowerPoint.
+- Reorganized the Customize > Featured tab so Azure DevOps is highlighted in Editor's picks, Figma appears alongside planning and shipping tools, and connected-work integrations are reordered.
+- Session automations are now available by default, so scheduled prompts run without needing to be enabled first.
+- Shortened the descriptions on featured extension cards so they display without truncation.
+- Simplified and standardized the source labels shown for installed skills, plugins, canvases, agent extensions, and MCP servers in Customize > Installed.
+- Simplified the queued message menu to Move up, Move down, Edit, and Copy, removing duplicate send/discard actions already available on the row.
+- Standardized fallback icons for MCP servers, skills, plugins, connectors, and canvases in the Customize view so each resource type shows a consistent, distinct icon.
+- The account switcher now shows just the username for accounts on the same host, only showing the full host/username when you have accounts on multiple hosts.
+- The checks panel on pull requests now shows contextual check names (like workflow and job) and matches GitHub.com's status wording and durations for running, successful, failing, and other check states, with skipped checks grouped separately from neutral checks.
+- The plan pill in the composer now keeps a stable "Plan" label as items complete, showing progress only through its count.
+- When adding a repository fails, you now see specific guidance about why (like needing to sign in to another account) instead of a generic error, with quick actions to add an account or open the health check.
+
+### Fixed
+
+- A project's selected custom agent is now remembered across app restarts instead of resetting to the default agent.
+- Collapsing a sidebar group for a session or chat you're currently working in no longer automatically re-expands it.
+- Conversation history now stays visible and readable if a session temporarily can't reconnect, with a retry action to reconnect.
+- Creating a Local session without picking a branch no longer forces an unexpected checkout, preserving your current branch instead.
+- Dropdown menus now block clicks on background elements until the menu is dismissed, preventing accidental actions while a menu is open.
+- Fixed a brief freeze and loss of keyboard focus that occurred when a long streaming response finished.
+- Fixed a bug where a session running a long command could be shut down mid-task, losing track of its progress, before the command finished.
+- Fixed a bug where rapid file changes in a collection workspace could spawn many overlapping Git processes and make the app unresponsive.
+- Fixed a bug where the queued messages count could show entries with no visible content when expanded.
+- Fixed a crash that could occur when deleting a column from a table in the composer.
+- Fixed a crash that could occur when sorting files in the diff view for repositories with directory names that differ only by casing.
+- Fixed a crash when opening certain malformed Excel files, which now show an error instead.
+- Fixed a folder session getting stuck showing a spinner with no way to view files.
+- Fixed a Linux crash where running git commands after the app auto-updated or restarted itself could fail with a library-loading error.
+- Fixed a memory leak on macOS where repeatedly opening and closing canvases left background processes running.
+- Fixed a race condition where restoring an archived session while archiving was still in progress could orphan its conversation history and create empty duplicate sessions.
+- Fixed a session sometimes getting stuck showing as running indefinitely after a tool finished.
+- Fixed a session's pull request link getting permanently stuck on a closed or merged pull request instead of updating to a new one opened on the same branch.
+- Fixed a Windows UI freeze that could occur when loading MCP app content.
+- Fixed activity row labels being misaligned with their leading icons.
+- Fixed an issue on Linux where the app could show a phantom media player entry with no title and, over time, cause the app to freeze or use excessive CPU.
+- Fixed an issue on Windows and Linux where relaunching GitHub Copilot while it was already running could sometimes start a duplicate copy of the app instead of bringing the existing window to the front.
+- Fixed an issue on Windows where archiving a session could fail and leave the archived session reappearing after restart.
+- Fixed an issue on Windows where the app could occasionally crash with a "This page is having a problem" error.
+- Fixed an issue where archiving a session could fail with an "Access is denied" error if files in the workspace were still locked by another process.
+- Fixed an issue where closing Quick Open could leave keyboard focus on the message composer instead of a newly opened question that needed a response.
+- Fixed an issue where directly installed plugins could fail to uninstall with a "not installed" error.
+- Fixed an issue where restoring an archived workspace could let you send a prompt before the session was fully ready, causing it to appear sent but never reach Copilot.
+- Fixed an issue where sending a follow-up message while background agents were still finishing up could be rejected instead of being queued and sent once they settled.
+- Fixed archiving a session from a worktree that lost its git link, so it no longer fails with an "Archive failed" error.
+- Fixed background subagent task details getting slower to update the longer a running message streamed in.
+- Fixed Computer Use settings sometimes showing permissions as ready before they were actually granted, and made dependent controls clearly disabled until permission status is confirmed.
+- Fixed extra visual spacing from repeated blank lines in the Markdown editor, so blank runs now render with consistent spacing while still showing exact blank-line markers when your cursor is nearby.
+- Fixed GitHub alert callouts (e.g. Note, Tip, Warning) not rendering correctly in the plan panel and canvas markdown preview when the alert body started with plain text.
+- Fixed high CPU usage and laggy typing on the Home screen caused by Mona's animation reacting to prompt input.
+- Fixed keyboard focus disappearing after dismissing a chat confirmation dialog, so keyboard navigation continues from where you left off.
+- Fixed keyboard focus dropping out after confirming removal of an account in Settings -> Accounts, so it now moves to a neighboring account instead.
+- Fixed keyboard shortcuts and menu navigation silently discarding an unsaved New issue draft instead of prompting to confirm.
+- Fixed links in chat references and the right-click Open link menu silently doing nothing when they failed to open, showing an error message instead.
+- Fixed math expressions using different delimiter styles right next to each other (e.g. `\(a\)$$b$$`) showing a parse error instead of rendering correctly.
+- Fixed MCP server entries in Customize opening with an empty configuration form; they now open pre-filled with the correct command, arguments, and environment fields.
+- Fixed messages sent by a coordinated session sometimes not appearing in the conversation while the queue count still included them.
+- Fixed misaligned icons and toggles for installed skill rows in Customize > Installed.
+- Fixed multi-paragraph LaTeX display expressions (delimited by \[ ... \]) not rendering correctly when separated by blank lines.
+- Fixed newly created sub-issues sometimes not appearing in the sub-issues list until the issue was reloaded.
+- Fixed onboarding sometimes skipping past the repositories step before its choices were visible when pressing Continue's keyboard shortcut twice quickly.
+- Fixed opening a WSL project failing when the shell prompt printed extra output after the git repository info.
+- Fixed pasting a copied table from apps like Numbers or Excel into the prompt composer, which previously attached a broken image and dropped the table content.
+- Fixed Pick & Polish so it works when previewing local HTML files in the browser preview.
+- Fixed pull request checks incorrectly showing obsolete, cancelled reruns as failing instead of reflecting the latest check attempt.
+- Fixed Quick Open and other command palettes not responding to Enter after clearing the search query with the keyboard.
+- Fixed Quick Open losing keyboard focus when a permission or decision prompt appeared
+- Fixed repository and session-picker popups (like the GitHub repository selector and "Start session in repository") not announcing their title to screen readers.
+- Fixed responses blocked by content filtering appearing to complete silently; the conversation now explains that the response was blocked and announces it for screen readers.
+- Fixed review comment navigation in diffs so jumping to a comment reliably expands the right file and context, avoids duplicate comment panels, and keeps line gutters aligned.
+- Fixed session creation being incorrectly blocked for repositories whose remote URL includes a GitHub username matching a signed-in account, such as when multiple GitHub accounts are configured on the same machine.
+- Fixed session creation failing for repositories cloned over SSH with a custom username, such as GitHub's SSH certificate authority clone format.
+- Fixed setup scripts sometimes failing on newly created workspaces before the workspace files were fully available.
+- Fixed slash commands for personal skills not being invoked correctly.
+- Fixed streamed chat answers containing a line break inside a table becoming progressively slower and janky the longer the answer got.
+- Fixed system prompt cards overflowing or getting cut off in narrow chat panes by wrapping long labels and subtitles.
+- Fixed task completion summaries getting an extra scrollbar and height cap instead of flowing normally in the conversation.
+- Fixed the app freezing briefly when copying a long assistant response
+- Fixed the Changes view incorrectly showing no changes for a workspace whose branch had already been merged into the base branch.
+- Fixed the comment editor's formatting toolbar being cut off and unclickable at narrow window widths.
+- Fixed the composer's model picker not announcing the selected model to screen readers when Auto mode is on.
+- Fixed the conversation view briefly freezing when moving the pointer over long answers containing code blocks.
+- Fixed the Dim theme option appearing active in light appearance even though it only applies in dark appearance.
+- Fixed the dock/taskbar badge count to match the sessions actually showing an attention indicator in the sidebar, so it no longer overcounts sessions that are working again after being unread.
+- Fixed the environment variables reference table in project Settings > Scripts being clipped and unreadable at narrow window widths.
+- Fixed the filter buttons in Automations, Appearance settings, and Keyboard shortcuts settings being too small to click reliably.
+- Fixed the fix-checks and resolve-comments slash commands so they are available when reviewing a pull request, not just one you created.
+- Fixed the Installed tab in Customize so refreshing MCP servers and plugins no longer shifts content; loading status now shows as a small indicator next to the header actions.
+- Fixed the keyboard focus indicator not being visible on the selected day (or range endpoints) in the date picker.
+- Fixed the keyboard focus ring in the Settings navigation being clipped at the top, bottom, and off-screen edges.
+- Fixed the local sandbox toggle incorrectly showing in the new session composer when Cloud was selected.
+- Fixed the model selector (and other composer menus/popovers) getting stuck open in the corner of the window when the agent asks a follow-up question while the panel is open.
+- Fixed the onboarding logo wave animation continuing to render in the background when the app was minimized, reducing unnecessary CPU usage.
+- Fixed the onboarding theme picker losing the selected palette from the grid when clearing search, filtering by color, or returning to the step.
+- Fixed the project Settings tab clipping the "Create config file" button and overflowing horizontally at high zoom or narrow window widths.
+- Fixed the session timeline's time axis being announced as an interactive control with no action for screen reader and keyboard users.
+- Fixed the sidebar context menu sometimes acting on a stale multi-selection instead of the session that was right-clicked.
+- Fixed the Stop button in the message composer becoming hard to see when focused with the keyboard.
+- Fixed the Stop button sometimes disappearing (and Esc no longer working to stop a turn) in GitHub-hosted sessions while the agent was still working.
+- Fixed the sub-agent activity view losing the latest streamed output while it was updating, so it now stays scrolled to the bottom automatically.
+- Fixed tool call results showing "No output" when an MCP tool returned its result as an embedded resource instead of plain text.
+- Fixed VoiceOver not announcing the position of rows in the Run options menu's Running, Recents, and Automations sections.
+- Fixed Word documents using excessive CPU while idle with the cursor placed but no typing happening.
+- Fixed WSL sessions failing to start or falling back incorrectly when a configured workspace folder no longer existed.
+- Markdown documents with YAML frontmatter no longer show the metadata as visible content in the document body.
+- Pinned sessions now stay in their own Pinned section when the sidebar is grouped by status, instead of being mixed into the status groups.
+- Restored the row dividers in the available MCP server list on the Customize page.
+- Restored the Show submenu in Configure sessions, letting you display project and branch info under session names, and fixed a small jitter when hovering over sidebar rows.
+- Submitting a slash command that isn't currently available now shows an error explaining why, instead of silently doing nothing (or, in some cases, sending the command text as a plain chat message).
+- The `/pr-approve` and `/pr-request-changes` commands are now disabled with an explanation when you try to review your own pull request, instead of submitting a verdict GitHub always rejects.
+- The plan panel no longer shows view options that could hide the task list when a plan contains only tasks.
+- The Skills list now explains when a skill file couldn't be loaded, instead of leaving that skill silently missing from the list.
+- Tooltips with long text now wrap within a consistent maximum width instead of growing unbounded, and keyboard shortcut hints stack neatly below wrapped labels.
+- Typing an issue or pull request number in the `#` mention picker now always resolves it, even if the item is older than the picker's recently prefetched suggestions.
+- When an MCP server disconnects mid-session, its reference chip now explains why it failed instead of just showing "failed".
+
 ## v1.1.12
 
 ### Highlights
