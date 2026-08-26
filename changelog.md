@@ -1,5 +1,40 @@
 # Changelog
 
+## v1.1.14
+
+### Highlights
+
+- Model, reasoning effort, and context window selection are now combined into a single menu in the message composer.
+- Added an "Open in external browser" option to the context menu for browser preview tabs.
+- Fixed Agent Merge sometimes treating a pull request's reviews as fully resolved when it had only checked the first page of review comments.
+- Fixed automations discarding the selected agent when saved, so scheduled and manual runs now use the agent chosen in the automation editor.
+- Fixed the # mention picker so pull requests and discussions can be found on repositories with many issues, instead of only ever showing issues.
+
+### Added
+
+- Added an "Open in external browser" option to the context menu for browser preview tabs.
+
+### Changed
+
+- Model, reasoning effort, and context window selection are now combined into a single menu in the message composer.
+- Moved the Open in menu back to the session titlebar.
+- Skill load failures now show as a neutral, dismissible notice instead of replacing the entire skills list.
+
+### Fixed
+
+- Fixed Agent Merge sometimes treating a pull request's reviews as fully resolved when it had only checked the first page of review comments.
+- Fixed an issue on the Home screen where pasting a GitHub URL into the prompt could switch the selected project away from the one you explicitly chose.
+- Fixed an issue where a resume failure could replace a session with an empty one even though its conversation history still existed.
+- Fixed automations discarding the selected agent when saved, so scheduled and manual runs now use the agent chosen in the automation editor.
+- Fixed browsing public marketplaces on Windows, where loading would fail before cloning.
+- Fixed missing accessible names for issue and pull request sidebar controls (type, labels, reviewers, assignees), so screen readers now announce them correctly.
+- Fixed the `#` mention picker in the prompt composer so pull requests and discussions can be found on repositories with many issues, instead of only ever showing issues.
+- Your prompt now stays visible and selectable in the conversation if session creation fails, instead of being replaced by a full-page error.
+
+### Removed
+
+- Removed the "Uncommitted work preserved" toast when archiving sessions; uncommitted work is restored automatically with the session.
+
 ## v1.1.13
 
 ### Highlights
