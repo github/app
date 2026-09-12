@@ -1,5 +1,45 @@
 # Changelog
 
+## v1.1.20
+
+### Highlights
+
+- Generated Markdown artifacts now open in the Files tab alongside repository files, with a switcher to move between them and an option to promote an artifact into the repository.
+- Custom agents that share a display name across plugins are now distinguished in the agent picker by their owning plugin.
+- The "Start from scratch" option in session creation menus and project pickers has been renamed to "Chat".
+- Fixed Cloud session responses sometimes stopping early and dropping later message content.
+
+### Changed
+
+- Artifacts like generated Markdown files now open in the Files tab alongside repository files, with a switcher to move between them and an option to promote an artifact into the repository.
+- Custom agents that share a display name across plugins are now distinguished in the agent picker by their owning plugin.
+- Renamed the "Start from scratch" option to "Chat" in session creation menus and project pickers.
+
+### Fixed
+
+- Fixed a bug where finishing a background session could pull you away from the session or grid you had since selected.
+- Fixed an issue where a new remote session could get stuck indefinitely on "Preparing worktree" or "Preparing project".
+- Fixed an issue where a valid agent response with no visible reply could incorrectly show a "No response was returned" error.
+- Fixed an issue where resuming a session could stall for up to 60 seconds when other sessions were resuming at the same time.
+- Fixed Cloud session responses sometimes stopping early and dropping later message content.
+- Fixed crashes in the code editor and table editing when working with certain scroll positions and markdown tables.
+- Fixed inconsistent spacing on the pending reviews indicator dot in the pull request overview.
+- Fixed keyboard focus being lost after hiding a repository from the sidebar when its group was first in the list
+- Fixed pressing the right arrow key after the last cell of a Markdown table in the message composer, so typing continues after the table instead of staying stuck inside it.
+- Fixed pull request and check status details sometimes failing to load on GitHub Enterprise when check app metadata was inaccessible.
+- Fixed repository avatars not loading for GitHub Enterprise Server accounts in Quick Open, and reduced the delay before suggested repository avatars appear.
+- Fixed sidebar session names continuing to scroll after the pointer leaves a row that remains focused, such as after clicking or dragging a pinned session.
+- Fixed the `/agent` autocomplete in the prompt composer showing identical entries for plugin agents that share the same name; it now labels them with their owning plugin so you can tell them apart.
+- Fixed the `#` and `@` mention menus showing "no results" when a lookup actually failed. They now show a clear error message with a Retry button instead.
+- Fixed the Add tab button sitting flush against the edge in empty panes so it now aligns with the same inset used elsewhere.
+- Fixed the Reviews tab count sometimes disappearing on a pull request after new comments loaded.
+- Long or multiline answers to ask-user prompts are no longer truncated into a single line; the full response is now shown with its original line breaks.
+- Restored Shades of Purple's authored syntax highlighting colors in the diff and code views.
+- Terminal text now automatically adjusts contrast against colored backgrounds so it stays readable in every theme.
+- The "Send now" button on queued messages now matches the composer's send button styling, with a compact appearance and a larger clickable target.
+- The @, #, and & mention menus in the prompt composer no longer disappear silently when a search finds no matches; they now show a "No results found" message that's also announced to screen readers.
+- Undo and redo now work reliably in the Markdown editor when switching between Live and Code modes.
+
 ## v1.1.19
 
 ### Fixed
