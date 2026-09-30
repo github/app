@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.1.25
+
+### Fixed
+
+- Existing local sessions in folders containing multiple repositories now reopen normally instead of incorrectly showing Worktree missing.
+
 ## v1.1.24
 
 ### Highlights
