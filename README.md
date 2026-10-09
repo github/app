@@ -66,7 +66,7 @@ For open-ended questions, please visit the [Discussions](https://github.com/gith
 
 ### Stale issues
 
-Open issues with no activity for 30 days receive a warning and the `stale`
+Open issues with no activity for 60 days receive a warning and the `stale`
 label. They are automatically closed if there is no new activity for another
 7 days. New activity removes that label on a subsequent daily run and resets
 the inactivity timer. Issues labeled `never-stale`, `help wanted`, `on-roadmap`,
