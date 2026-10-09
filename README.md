@@ -64,6 +64,17 @@ Report problems or feature requests for the GitHub Copilot app team in the [Issu
 
 For open-ended questions, please visit the [Discussions](https://github.com/github/app/discussions) tab.
 
+### Stale issues
+
+Open issues with no activity for 30 days receive a warning and the `stale`
+label. They are automatically closed if there is no new activity for another
+7 days. New activity removes that label on a subsequent daily run and resets
+the inactivity timer. Issues labeled `never-stale`, `help wanted`, `on-roadmap`,
+`pinned`, or `security` are exempt. Pull requests are left unchanged.
+The [stale issue workflow](./.github/workflows/stale-issues.yml) runs daily at
+01:30 UTC and can also be run manually. GitHub Actions must be enabled for
+this automation to run.
+
 ## License
 
 © GitHub, Inc. All rights reserved.
@@ -71,4 +82,3 @@ For open-ended questions, please visit the [Discussions](https://github.com/gith
 ## Data & Telemetry
 
 If you use the GitHub Copilot App with your GitHub Copilot account, we may collect usage data (such as code acceptance or rejections), associated conversation data, and user feedback submitted via the feedback dialog. See our [GitHub Copilot Trust Center](https://copilot.github.trust.page) for more information.
-
