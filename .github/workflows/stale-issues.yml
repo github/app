@@ -37,4 +37,4 @@ jobs:
           exempt-issue-labels: never-stale,help wanted,on-roadmap,pinned,security
           remove-issue-stale-when-updated: true
           remove-pr-stale-when-updated: false
-          operations-per-run: 100
+          operations-per-run: 1000
