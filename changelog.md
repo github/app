@@ -1,5 +1,145 @@
 # Changelog
 
+## v1.1.31
+
+### Highlights
+
+- Assisted approvals is now available to everyone, approving requests an automatic safety check deems safe and prompting you otherwise.
+- Select multiple sessions in an agent's Overview tab, then archive, delete, mark as read, or open them in a grid together.
+- Edit a whole file directly from the All changes or Uncommitted changes diff.
+- WSL hosts are now enabled by default on Windows, letting you discover WSL distributions and create sessions inside them.
+- The app now runs sessions on the native runtime by default for everyone.
+
+### Added
+
+- Added an opt-in "Include Agent merge" setting under Settings > Sessions > Keep awake to keep your computer awake while Agent merge monitors pull requests
+- Assisted approvals is now available to everyone. Assisted mode approves requests an automatic safety check deems safe and prompts you otherwise. You can turn it off in Settings.
+- Edit a whole file directly from the All changes or Uncommitted changes diff.
+- On macOS and Linux, the health check now warns when known Copilot configuration or runtime state files, or their directories, belong to another user and lists the affected paths without changing any files.
+- Project settings now show a read-only Plugins section listing the plugins and marketplaces that apply to a project, and indicate when the repository must be trusted first.
+- Right-click an automation to view its last run's session directly with the new View last session menu item
+- Searching the command palette now finds your canvases directly by name, description, or extension, and searching within Open canvas highlights the matching canvas instead of New canvas
+- Select multiple sessions in an agent's Overview tab with Cmd/Ctrl-click or Shift-click, then archive, delete, mark as read, or open them in a grid together from the context menu
+- The browser preview toolbar now includes an options menu with hard reload, page zoom, and Find in Page (macOS and Windows).
+- WSL hosts are now enabled by default on Windows, letting you discover WSL distributions and create sessions inside them.
+
+### Changed
+
+- Approve all now appears greyed out with an explanation when your organization's policy restricts it.
+- Cleaned up the session menu: the redundant "Folder session" label is gone, and multiple checkout paths now appear in a Checkouts submenu with copy-path actions.
+- Cloud sessions now show a clickable Cloud row in the session title menu that opens the session on GitHub, and the cloud icon is part of the title click target.
+- Conversations now show a "New" divider marking activity that arrived while you were away, in all chats and sessions, not just Agent child sessions.
+- Issue and pull request links in a session's right-panel details now open in another tab within the session instead of the system browser
+- Issue sessions now show your prompt and live setup progress in the conversation while they start, instead of a separate "Starting issue session" screen.
+- Model-change notices in the conversation are now a single line showing both the previous and new model, instead of a collapsible row that hid the previous model.
+- New cloud automations now start with no optional tools selected, so tool access is an explicit choice.
+- Overview rows now show a brief green completed ring when all of an agent's todos finish, and pending todos in the Tasks list appear quieter than started ones
+- Overview rows now show the agent's current todo or a one-line summary of its latest response instead of the raw tail of its last message
+- Pasted-text and quoted-message pills now open a scrollable, selectable preview with Copy and Close controls, instead of opening an editor tab.
+- Persistent Agents are now called Projects, and the old projects are now called repositories (or folders and collections for those kinds), across the sidebar, Settings, menus, commands and messages.
+- Running /compact while the agent is working in a local session now queues compaction to run automatically once the current work finishes, instead of rejecting the command.
+- Selecting GitHub in Customize > MCP now prefills the hosted HTTP endpoint instead of a Docker command, with Local still available as an alternative.
+- Simplified repostitory trust to be a simple confirm/deny choice for the repository rather than per update.
+- The Add server picker in Customize > MCP now lists connectors you haven't connected yet alongside popular servers, and no longer shows a duplicate server for a service that already has a connector.
+- The app now runs sessions on the native runtime by default for everyone. You can switch back in Settings, and the change applies after a restart.
+- The app window can now be resized to a smaller minimum height (500 px instead of 700 px).
+- The built-in browser now enforces enterprise domain permission policies, blocking navigation, redirects, and new tabs to restricted domains and prompting for approval when a policy requires it.
+- The session bar's review button now reads "Submit draft review" when only a review summary is pending, and shows a count of staged inline comments.
+- When a leftover Git lock file blocks a new session's fetch, the app now names the lock files to remove instead of suggesting a repository access problem.
+
+### Fixed
+
+- "Fix with instructions" on pull request conversation comments and review summaries now sends the prompt instead of doing nothing.
+- "Merge when ready" and "Queue when ready" can now be enabled on pull requests with merge conflicts, while immediate merging stays blocked until conflicts are resolved
+- A downloaded app update is now rechecked before it installs on restart or launch, so a withdrawn or outdated update is no longer installed.
+- A single unresponsive session no longer interrupts other running sessions that share the same Copilot process
+- A slow but healthy shared Copilot runtime is no longer restarted when sending or resuming a session, which previously interrupted every other session running on it
+- Adding or removing a pull request assignee no longer fails when Copilot is already assigned
+- After you submit a pull request review from the app, the agent working in that workspace is now told what was posted.
+- Agents working from a GitHub issue can now view images attached to the issue and its comments, including those in private repositories, and tell you when an image can't be read.
+- Automation groups now appear much faster when opening the Automations overview.
+- Changing models in a very large conversation no longer silently reverts; a message now explains that the conversation is too large for the selected model and suggests /compact.
+- Chats keep their title when they are recreated after their saved transcript goes missing, instead of showing as untitled.
+- Clicking Sign in on an MCP server now starts a fresh sign-in instead of silently reusing cached authorization, and Customize offers Sign in again for plugin-provided servers.
+- Clicking the microphone button a second time while dictating no longer cancels and discards your transcript; "Use transcript" now takes the microphone's place.
+- Copying text from a Markdown canvas no longer includes hidden "Edit section" controls when pasted into other apps
+- Creating a session from a pull request in a project whose repository is tracked through an upstream remote now uses the correct base, so the session diff shows only the pull request's changes.
+- Customize > Installed is more responsive for people with many projects and worktrees, including while typing in search
+- Customize and the Open canvas dialog no longer show load errors for projects whose checkout folder was moved or deleted, and Customize Browse leaves load issues with installed skills and canvases to the Installed tab
+- Deleting a local session on Windows no longer fails when its checkout contains files that can't be read; the rest of your work is preserved and a warning lists any paths that couldn't be saved.
+- Editing a cloud automation no longer drops MCP tools configured on github.com, and the tool picker now offers the repository's MCP server tools.
+- Failed automation runs that have no recorded chat session now show the recorded error, trigger, and timestamps instead of a generic empty state.
+- Fixed "Start on system start" on Linux so the app launches at login when installed at a path containing spaces
+- Fixed a duplicate "Model changed to …" message appearing in the conversation after a model fallback
+- Fixed a macOS issue where a stale background copy of the app could survive an update and prevent the new version from starting. Launching the app again now brings the existing window forward, and update restarts hand off cleanly.
+- Fixed a question restored after an app upgrade staying on screen with answering disabled after its session had moved on.
+- Fixed a race where submitting a prompt right after choosing "No repository" in Quick Open could leave you on the New session page instead of opening the new chat
+- Fixed a stale "Session unavailable" banner that could remain on a session after a slow resume eventually succeeded.
+- Fixed Auto model selection showing duplicate or misplaced notices after reloading a conversation, so each real model switch now shows a single notice.
+- Fixed browsing folders on WSL failing with an authentication error for GHE.com data residency accounts
+- Fixed reasoning disappearing from some assistant steps when reopening a saved chat.
+- Fixed renaming a row from the Agent Overview showing a tiny input; it now fills the available title width.
+- Fixed session renames requested by the agent changing the capitalization you asked for, such as "Title Case" becoming "Title case".
+- Fixed SSH connections to Windows hosts failing when the chosen port falls in a Windows excluded port range
+- Fixed the "Session appears to have been interrupted" banner disappearing when late events arrived after a session was stopped.
+- Fixed the agent's response sometimes appearing twice in plan mode
+- Fixed the app being unresponsive at startup while stale workspace cleanup ran in the background
+- Fixed the app failing to start after an upgrade when a profile contained project checkouts that referenced missing projects.
+- Fixed the compaction-in-progress indicator staying on indefinitely after restarting the app with an idle session.
+- Fixed the integrated terminal failing to start on Windows when using the Microsoft Store version of PowerShell.
+- Fixed the loading spinner in the repository trust prompt appearing slightly above its keyboard shortcut hint.
+- Fixed the model notice and progress indicator jumping up when a new Project's repository setup starts
+- Fixed the pull request Description tab so the edit button and editing footer stay at the bottom right for short descriptions
+- Fixed the sidebar sometimes appearing blank or misaligned after opening a session that was scrolled out of view, such as from a notification or the disk space manager.
+- Fixed WSL and SSH sessions ignoring the Approve all permission mode and prompting for approval on tool calls
+- Fixed WSL environment setup and reconnect failing with a download error when installing the Copilot daemon.
+- Full-screen pull requests that fail to load now keep the header and breadcrumb so you can navigate back to the pull request list.
+- Home autocomplete suggestions are no longer covered by the mascot, and selecting a skill slash command keeps it as editable text so you can add arguments.
+- Improved screen reader announcements and keyboard focus outlines for rows in the Automations list and Runs views
+- Interrupted sessions no longer auto-continue or offer Resume past a pending permission request; they wait until you respond to it.
+- Issue and pull request links that share a number now open the correct existing session from quick open and the link context menu, even when the link uses the other kind (e.g. an /issues/N link that is a pull request).
+- Japanese, Chinese, and Korean input methods compose text inline in the session composer again, instead of leaking the first letter and converting the rest in a separate window.
+- Local conversations now show the repository trust prompt when Local approval is missing, even if configuration was accepted on a remote host. Project settings exposes its existing trust controls when approval is needed, without changing trust badges or labels.
+- Merge queue links on stacked pull requests now open the queue for the stack's target branch instead of the immediate parent branch.
+- On Windows and Linux, Ctrl+Left/Right (and Ctrl+Shift+Arrow) in the composer now moves by word instead of jumping to the line edge when a line starts with a session reference or skill chip.
+- Opening remote conversations with long histories now waits up to 3 minutes instead of timing out after 60 seconds
+- Pasted issue and pull request links in the prompt composer now show their current title and draft state instead of outdated details.
+- Pasting a GitHub file, folder, commit, or workflow-run link into a chat no longer starts cloning the repository
+- Pressing Cmd+A on macOS now only changes the selection in the focused app window instead of also affecting other open windows
+- Project sandbox read-only and denied folder restrictions now also apply to sessions running in worktrees.
+- Pull request and issue links in Home prompts now stay as context instead of unexpectedly starting PR-specific setup or changing the selected project
+- Pull request and issue views now link existing sessions correctly, and pasted resource links in Quick Open no longer show unrelated or redundant actions
+- Pull request descriptions and comments now show HTML images and GitHub-hosted image and video attachments inline while editing, instead of as raw source text.
+- Pull request tabs in chats and Projects now always show a Merge button, including for pull requests not owned by a session in the Project.
+- Quote reply on pull request and issue comments, descriptions, and review summaries now fills and focuses the bottom comment box instead of opening a thread reply that couldn't be posted.
+- Remote-only projects no longer show a non-functional "Show in Finder" action in the sidebar context menu
+- Running a slash command such as /chronicle without a valid subcommand now lists the available subcommands instead of showing no response.
+- Salesforce Apex files (.cls, .trigger, .apex) now get syntax highlighting in diffs and file views
+- Scrolling up in a conversation with middle-click autoscroll no longer snaps the view back to the bottom
+- Selecting a custom model whose ID contains a slash now sends the full model ID instead of only the part after the slash.
+- Selecting a session from the sidebar or with session-switching shortcuts now shows its conversation right away, even while other sessions are streaming.
+- Sessions created by a project coordinator chat now appear under their parent in the sidebar instead of seeming to disappear when their repository group is collapsed
+- Sessions no longer appear to stop or fail when a temporary session-saving warning occurs while the agent is still working.
+- Sessions started by an agent in the background now show their working status in the sidebar right away, instead of appearing idle until you open them.
+- Setting CLI session history to Off or a shorter window now only hides older sessions instead of permanently deleting their workspaces and activity, so they return when you widen the window again
+- Skills you have disabled in your settings now stay disabled when a new session starts, instead of being re-enabled until the session is restarted.
+- Small but nonzero AI credit usage now shows as "<1%" instead of "0%" in Settings, the sidebar user menu, and the composer usage gauge
+- Switching branches in a shared checkout no longer reorders sessions by "Updated" time
+- The "Some skills couldn't be loaded" notice in Customize > Installed now appears under the Skills heading instead of at the top of the page.
+- The built-in browser no longer blocks every URL with "blocked by enterprise policy" in GitHub Sandbox, remote, and cloud sessions; managed domain policy now applies only to pages the agent can access.
+- The conversation's keyboard focus outline is no longer partially hidden, and Arrow Up and Arrow Down now scroll the conversation when it has keyboard focus.
+- The Extensions "Learn more" link now opens the Copilot CLI extensions documentation instead of GitHub CLI extension docs
+- The Health check screen no longer times out when a diagnostic probe is slow, and application logs stay visible and exportable while diagnostics load or fail.
+- The merge drawer now shows "Merge blocked" with a Resolve conflicts action for stacked pull requests with conflicts, instead of staying on "Checking merge status".
+- The model picker no longer goes empty after a failed model list refresh; your last loaded models stay available, including after a reload.
+- The session row in the pull request view now shows the same status indicator as the sidebar, so merge-ready sessions are no longer shown as needing input.
+- The Settings dialog is now centered in the window instead of sitting lower than center.
+- The slash command picker now shows a loading status while a new session's project skills are still being discovered, and shows recovery guidance if skill discovery fails.
+- The unread dot on sidebar agent rows now cuts cleanly out of the agent icon, so it stays distinct on default, hovered, and selected rows in light and dark themes.
+- Turned-off items in Customize, such as MCP servers, now mute their name and icon instead of fading the whole row, so the toggle stays clearly visible even when the name matches a search.
+- Untouched workspace branches are now cleaned up when deleted, even if your local default branch has diverged from the remote.
+- When a message fails to send because the connection check timed out, your text and attachments are now restored to the composer so you can retry.
+
 ## v1.1.30
 
 ### Highlights
