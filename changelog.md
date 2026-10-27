@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.1.33
+
+### Highlights
+
+- Cloud automation forms now have a Suggest tools button that adds tools based on your instructions while keeping your existing selections.
+- New cloud automations now require write access to trigger by default, and the automation editor respects the repository's read-access and trigger-scoped write policies.
+- New sessions for enterprise-managed Copilot accounts now show the managed default model in the model picker before you send your first prompt.
+- Resuming a session no longer hangs when remote session setup fails; it now falls back to resuming locally.
+
+### Added
+
+- Cloud automation forms now have a Suggest tools button that adds tools based on your instructions while keeping your existing selections.
+
+### Fixed
+
+- New cloud automations now require write access to trigger by default, and the automation editor respects the repository's read-access and trigger-scoped write policies, fixing save errors when those policies are enforced.
+- New sessions for enterprise-managed Copilot accounts now show the managed default model in the model picker before you send your first prompt.
+- Resuming a session no longer hangs when remote session setup fails; it now falls back to resuming locally
+
 ## v1.1.31
 
 ### Highlights
