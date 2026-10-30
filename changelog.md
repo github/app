@@ -1,5 +1,135 @@
 # Changelog
 
+## v1.1.34
+
+### Highlights
+
+- CSV and TSV files now open as a table with sticky headers and a Table/Source toggle in the file viewer.
+- Drop files onto the sidebar "New" item to start a new session with them attached.
+- Agent merge options are now available from the merge status button in pull request views.
+- Resuming a session with a long history is much faster instead of taking tens of seconds to load.
+- Large Mermaid diagrams no longer freeze the app while they render.
+
+### Added
+
+- Added a "Detach session" option to the context menu of chats nested under a workspace or another chat, so you can separate them from their parent without losing the conversation.
+- Added a floating "Scroll to bottom" button to the full pull request Overview so you can jump to the latest activity and comment box.
+- Agent merge options are now available from the merge status button in pull request views, so you can enable or configure Agent merge while reviewing the pull request.
+- CSV and TSV files now open as a table with sticky headers and a Table/Source toggle in the file viewer
+- Drop files onto the sidebar "New" item to start a new session with them attached.
+- Markdown files with YAML frontmatter now show a source indicator in Live mode and a read-only table in Read mode.
+- Pin or unpin several sidebar sessions at once from the context menu when multiple sessions are selected
+- Plugin install links can now include a marketplace to add, so a single link and confirmation installs a plugin from a marketplace you haven't added yet.
+- The Pinned section of the Project Overview now offers "Archive merged PRs" to archive pinned sessions whose pull requests have merged or closed.
+
+### Changed
+
+- Added and removed lines in diffs now have stronger background colors, making them easier to see in low-contrast themes.
+- Agent merge action options stay visible and editable while it is off, and it can only be turned on once at least one action is selected.
+- Checklist items now indent and outdent like regular bullet lists, and Markdown tasks can be reordered with their nested items by dragging the checkbox.
+- Issue and pull request filters now show explicit Discard and Save buttons for unsaved changes, with a dropdown for Save as new view and Revert to default.
+- Issue and pull request pages now show a responsive breadcrumb with the repository and section, which collapses into a menu at narrow widths and returns to the repository's list.
+- Resuming a session whose WSL environment is disconnected now explains the connection problem and offers an Open environments action to reconnect, instead of showing a generic restore failure.
+- Selecting another pull request from the stacked pull request menu now opens it as a tab in the current session instead of creating or switching sessions, the stack badge appears next to the pull request status, and referenced pull request Files tabs use the edge-to-edge diff layout.
+- The image preview now behaves like a photo viewer: 100% shows the image's real pixels, zoom follows the pointer, and keyboard focus stays inside the preview until you close it.
+- The pull request reviewer picker now shows each reviewer's review state inline and offers a re-request review action on each eligible reviewer row.
+- The tray menu now shows your five most recently active Projects, and "New Project" appears next to "Create Session" and "New Chat".
+- Try the Pele renderer for Mermaid diagrams by enabling Pele diagrams in Experimental settings
+- Very large Markdown files now show a notice with a Load file button instead of loading automatically, keeping the app responsive until you choose to open them.
+- Your own account now appears first in assignee pickers and people filters when the search box is empty.
+
+### Fixed
+
+- A newer update now replaces the existing "Ready to update" notification instead of showing a second one alongside it
+- A session whose worktree Git has been pointed at another folder (core.worktree) now says so and names the setting, instead of a false "Worktree missing", and resumes on Retry once the setting is removed. Recovery messages describe the actual problem, offer Recreate worktree only when a worktree's folder is gone, offer Show in file manager otherwise, and no longer leave a stray divider over the message.
+- Adding a large plugin marketplace no longer fails with a timeout while its repository is still cloning
+- Adding an SSH environment no longer fails when the remote user's login shell is fish, tcsh, or another non-POSIX shell
+- After creation, new local worktrees no longer wait for unrelated background Git fetches during the final readiness handoff.
+- After removing a repository's linked account, Settings and the sidebar now show the repository as disconnected and let you select the remaining account to relink it.
+- Agent merge no longer repeatedly re-prompts a session after its Copilot quota is exhausted; it now pauses and shows a message until you send a message or quota is available again.
+- Agent merge now pauses with a single notice when a session's workspace folder is missing, instead of retrying in a loop, and resumes automatically once the folder is back.
+- Agent merge now stays on when GitHub rejects a merge because required checks or rules are not yet satisfied, and merges the pull request once it becomes ready.
+- Archiving a session no longer waits for its checkout's files to be deleted, so archiving sessions with large checkouts finishes promptly instead of hanging for many minutes
+- Connecting over SSH on Windows no longer opens a visible console window that could disconnect the session if closed
+- Connector sign-in warnings in the conversation now point to Customize > Installed > MCP, and the action button opens the installed MCP list instead of the removed Connectors page
+- Copilot usage percentages now refresh hourly and when you return to a window that has been open for a while, instead of appearing stuck.
+- Copy path on files in a session's generated-file tree now copies the full absolute path instead of a relative one
+- Copying a sent prompt now includes the full text of any large pasted content instead of just its label
+- Creating a pull request from a session started from an issue no longer adds a closing reference when the description already links the issue (for example with "Relates to"), so partial work doesn't close the issue on merge
+- Edit and Retry are no longer offered on a prompt while its session is still starting or busy, avoiding a "session not found" error.
+- Editing a Markdown file no longer rewrites untouched paragraphs where a bold span crosses a line break and the closing line also uses underscore emphasis.
+- Edits you make to a voice dictation transcript while recording are now preserved when speech recognition updates or when you confirm the recording
+- Existing sessions now pick up updated model provider credentials after you save them, without needing to switch models.
+- Fixed a crash in the file editor when clicking a line containing only a stray carriage return in files with mixed line endings.
+- Fixed a false "session creation failed" error appearing when a new workspace took more than five minutes to finish setting up
+- Fixed a message typed while a new chat is still starting being silently dropped; it's now accepted immediately and delivered once the chat is ready.
+- Fixed a startup crash on Linux when no system tray library is available, and a crash when opening spreadsheets with circular named-range references, which now show a #CYCLE! error.
+- Fixed agents added by plugins sometimes disappearing from a session's agent picker shortly after the session opened.
+- Fixed bold or italic text that ends right before a backslash-escaped character showing stray asterisks in the Markdown editor and being rewritten with escaped asterisks when the file was saved.
+- Fixed browser previews on Windows landing in the wrong place or staying misplaced after resizing or maximizing the window
+- Fixed crashes when opening a terminal with non-Unicode environment variables and when loading spinners with an invalid document timeline
+- Fixed edits in Settings, such as custom instructions, being discarded when the app was quit, restarted, or closed while the field was still focused; they are now saved before the app shuts down.
+- Fixed first-run GitHub Enterprise Cloud sign-in leaving no visible way back when the device-code request fails (for example, a mistyped address); a Cancel button now returns you to the welcome screen
+- Fixed GitHub issue and pull request links in cloud automation run transcripts not opening when clicked.
+- Fixed long URLs in a narrow terminal pane being truncated, opened, and linked only up to the first line when a program wraps its output at the pane edge.
+- Fixed long-running subagent tasks being interrupted when the session appeared unresponsive
+- Fixed low-contrast keyboard shortcut labels on buttons, making them easier to read.
+- Fixed middle-click in the prompt composer on Linux sometimes pasting the clipboard instead of the primary selection.
+- Fixed multi-line LaTeX display formulas (delimited by \[ ... \]) rendering their first lines as a large heading instead of math when one of their lines held only = or -.
+- Fixed new sessions sometimes taking up to a minute to start on large repositories while a background branch refresh was running.
+- Fixed page content in the right-panel browser stretching or squeezing while dragging the panel divider
+- Fixed pressing Enter in the Markdown document editor on macOS sometimes leaving further typing on the previous line
+- Fixed pull request view tabs being clipped at the top in the session Pull requests panel at narrow widths
+- Fixed Pull Requests becoming unresponsive when reopening a saved location without filters
+- Fixed removing a plugin marketplace making the app re-read installed plugins, skills, agents, MCP servers and marketplaces twice; each list is now read once.
+- Fixed sessions created by an agent losing their requested model, reasoning effort and context tier when the session had to be started again after its first start failed.
+- Fixed slash commands that depend on the model, such as /rubber-duck, staying unavailable in a resumed local session when the command list loaded before the model list; the command list is now refreshed once the model list is ready.
+- Fixed starting a new session from Home for a collection project, which previously failed because a nonexistent branch was submitted for every repository.
+- Fixed the Browser canvas and extension canvases being misplaced on macOS after maximizing or restoring the window
+- Fixed the commit list showing "Retry commits" instead of loading when a local worktree is still being set up.
+- Fixed the pull request description editor losing your scroll position and cursor when a dropped video finishes uploading
+- Large Mermaid diagrams no longer freeze the app while they render
+- Long session titles no longer stretch the macOS Dock menu; labels are now shortened to a single line with an ellipsis.
+- Merged pull requests whose base branch was deleted can now be opened as a session instead of failing with "Session: Unavailable"
+- Mermaid block diagrams now render instead of failing with an "Unsupported color format" error
+- Messages sent to Copilot while it is working are no longer lost if the app quits or the session restarts before they are delivered; they are restored to the composer.
+- New sessions that create a worktree start faster, no longer waiting on unrelated background Git fetches for data that is already local
+- Pasting a pull request URL into Create from now shows the matching pull request, with its number and title, before offering environment choices.
+- Plugin marketplaces now show the actual error when a refresh fails after signing in, instead of repeatedly offering Login.
+- Pressing Ctrl+P (Cmd+P on macOS) in a session's Files tab now opens Go to file over that tab's files instead of the print dialog.
+- Pressing Ctrl+Shift+Tab to go to the previous tab while typing in the message box no longer also changes the agent mode or exits shell mode.
+- Pressing Enter in "New session from…" now starts the session after you pick a pull request or issue, instead of requiring a click.
+- Pull requests opened as tabs in a session now show the merge status button, and the merge drawer no longer offers "Fix failing checks" when there is no session to send the fix to.
+- Removing a marketplace that needs sign-in from Customize > Plugins now asks you to confirm uninstalling its plugins instead of doing nothing
+- Reopening an unsaved inline diff edit no longer shows an extra line or lets typing change hidden code below it when the draft removed or joined the last lines of a visible block.
+- Resuming a session with a long history is much faster instead of taking tens of seconds to load
+- Retry and Restart session on the "Failed to restore session" screen can now be clicked while a session is still loading, so sessions no longer get stuck after a restore timeout
+- Right-clicking selected text in a side question answer now offers Copy
+- Running subagent progress now shows friendly connector and tool names instead of internal MCP routing names
+- Saving a Markdown file in the editor no longer turns untouched lines such as `&#35; not a heading` or a `***` rule under a paragraph into headings, lists, quotes or links
+- Selected dividers in the Markdown editor now show a visible outline, so focus no longer appears lost when you click or arrow onto one.
+- Sessions no longer show as "Needs input" while a restored question is still being recovered; they show as working until the question can be answered.
+- Sessions started from a branch in the Create from picker are now titled from their first prompt instead of keeping the branch name
+- Sessions that failed to start or resume now show a failed status and the error reason in a project's Overview under Needs input.
+- Sessions with a known pull request now keep their pull request icon in the sidebar even when the session failed to resume or its checkout is missing or being rebuilt
+- Starting or resuming a session no longer shows a "Copilot sessions are unavailable" error when the machine is heavily loaded and the health check is slow to respond.
+- Streamed answers no longer show an extra paragraph break when a line such as `$$ E = mc^2 $$` or `#1234` arrives in pieces
+- Submit review is now available on pull requests authored by Copilot or GitHub Actions, and when reviewing contributors' pull requests with local changes
+- Tasks that depend on several prerequisites now appear after all of their prerequisites in the task list instead of under just one of them.
+- The @ file picker in new sessions now lists files inside nested Git repositories and submodules instead of showing them as a single folder.
+- The /chronicle commands can now be picked from the slash command list when writing the prompt of a local automation.
+- The agent picker now shows an error message when the runtime refuses to switch or clear the agent, instead of silently doing nothing.
+- The merge drawer no longer shows a misleading push-denied warning for pull requests from a fork you can write to into a repository where you only have read access
+- The palette search in Settings → Themes now uses a clear button that matches the selected theme instead of the native one.
+- The pending-review badge in comment headers no longer wraps onto two lines when the file path is long
+- The quit confirmation now correctly warns when an agent session is waiting for your response, such as a permission prompt or plan approval, instead of allowing the app to close silently.
+- The session title menu now keeps environment status on one line, shows a clear "Reconnecting" status instead of conflicting states, and uses "Environment" consistently.
+- The side panel's top-right open/close toggle now stays available when the panel is maximized, so you can close it directly.
+- Typing @ in a brand-new chat before sending a message now shows a message explaining that files will be available after the chat starts, instead of showing nothing.
+- Very tall images shown by the View tool now display a readable, top-cropped preview instead of shrinking into an unreadable strip
+- Voice dictation now inserts the transcript at the caret when it sits on a blank first line of a paragraph, instead of misplacing text and selecting the paragraph break
+- When you hit a global rate limit, the prompt no longer offers to switch to auto model, since that action can't clear the limit.
+
 ## v1.1.33
 
 ### Highlights
