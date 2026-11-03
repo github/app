@@ -66,7 +66,7 @@ For open-ended questions, please visit the [Discussions](https://github.com/gith
 
 ### Stale issues
 
-Open issues with no activity for 30 days receive a warning and the `stale`
+Open issues with no activity for 60 days receive a warning and the `stale`
 label. They are automatically closed if there is no new activity for another
 7 days. New activity removes that label on a subsequent daily run and resets
 the inactivity timer. Issues labeled `never-stale`, `help wanted`, `on-roadmap`,
@@ -74,6 +74,10 @@ the inactivity timer. Issues labeled `never-stale`, `help wanted`, `on-roadmap`,
 The [stale issue workflow](./.github/workflows/stale-issues.yml) runs daily at
 01:30 UTC and can also be run manually. GitHub Actions must be enabled for
 this automation to run.
+
+Each run has a budget of 5,000 operations and a 60-minute timeout. If the
+operations budget is exhausted, the workflow saves its progress in the Actions
+cache so a later run can resume.
 
 ## License
 
