@@ -36,7 +36,8 @@ Download the app for your platform:
 - [Windows (ARM)](../../releases/latest/download/GitHub-Copilot-windows-arm64-setup.exe)
 - [Mac (Apple Silicon)](../../releases/latest/download/GitHub-Copilot-darwin-arm64.dmg)
 - [Mac (Intel)](../../releases/latest/download/GitHub-Copilot-darwin-x64.dmg)
-- [Linux](../../releases/latest/download/GitHub-Copilot-linux-x64.AppImage)
+- [Linux (x64)](../../releases/latest/download/GitHub-Copilot-linux-x64.AppImage)
+- [Linux (ARM)](../../releases/latest/download/GitHub-Copilot-linux-arm64.AppImage)
 
 You can also browse all builds on the [Releases](../../releases) page.
 
