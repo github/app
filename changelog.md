@@ -1,5 +1,451 @@
 # Changelog
 
+## v1.2.0
+
+### Highlights
+
+- Continue cloud and Codespace sessions on your phone with a new "Open in" menu and GitHub mobile app QR code.
+- Dictation now supports French, Spanish, and other languages via a downloadable multilingual voice model.
+- GitHub Enterprise Server accounts can now be added from Settings → Accounts, with repositories, issues, and pull requests available.
+- Filter Issues and Pull requests by custom fields, such as a GitHub Project's Size.
+- Press Cmd+P while browsing a repository's code to search its files and folders on the current branch.
+
+### Added
+
+- Added an "Open in" menu for cloud and Codespace sessions with a GitHub mobile app option that shows a QR code to continue the session on your phone
+- Dictation now supports French, Spanish, and other languages. Download the multilingual voice model in settings and choose Auto or a specific dictation language.
+- GitHub Enterprise Server accounts can now be added from Settings → Accounts for everyone, with repositories, issues, and pull requests available
+- Home now suggests the Slack MCP integration when Slack is installed, with an easy way to add or dismiss the suggestion.
+- Issues and Pull requests can now be filtered by custom fields, such as a GitHub Project's Size, from the Add filter menu.
+- PDFs now open inline in the file viewer and file tabs on macOS, instead of showing a "preview isn't available" message.
+- Press Cmd+P while browsing a repository's code to search its files and folders on the current branch, or choose Go to file from the command palette.
+- Project automations now support minute-precise daily and weekly schedules and custom cron schedules, so agents can schedule things like weekdays at 9:30 without creating app-wide automations
+- Send an issue or pull request to an existing project from the command palette or the New session menu; the reference is added to the project's draft without being sent. Tab to chat in the command palette has been removed.
+- Settings now has switches to turn the confirmation dialogs back on for deleting My work views, closing terminals, editing messages and retrying responses after choosing "Don't ask again"
+- Use arrow keys to move between items in lists such as My Work issues and pull requests and Customize collections, with fewer Tab presses needed to get through them.
+
+### Changed
+
+- Clicking a GitHub pull request or issue link in the Browser Canvas now opens it in the app instead of loading github.com in the canvas, with an option in Browser options to turn this off
+- Clicking a repository in the Sessions sidebar now expands or collapses its sessions, and a new book icon on hover opens the repository page
+- Creating a repository with a name the owner already uses now explains that the name is taken and asks you to choose a different one.
+- Custom sidebar sections now stay visible when Projects is collapsed, and the Projects list shows every project instead of hiding extras behind Show more
+- Dropdowns now open over their trigger with the current choice aligned to the trigger's label, and submenus overlap their parent menu without animating
+- Faster app launch with many sessions: sidebar groups that start collapsed no longer build their session rows until you open them
+- High contrast now works with red, green, or blue-yellow Color filters in Settings → Accessibility. Preview and adjust lets you try combinations before applying them. Choose GitHub Dimmed as a dark-only palette in Settings → Themes. High contrast replaces the separate "Increase contrast" setting.
+- Improved sidebar keyboard and screen reader navigation with consistent section headings, independent session trees, and a single visible focus outline per row
+- In Pick & Polish, you can now drag in the browser preview to capture a screenshot region without holding Shift. Clicking still picks an element, and pressing Escape exits Pick & Polish.
+- Pull request comment reply boxes now grow as you type, up to about 10 lines, instead of staying 2 lines tall
+- Search fields across the app, including session search and the changed files filter, now show a themed clear button instead of the default browser one.
+- Setup scripts for pull requests from forks no longer run automatically; you now approve them with a Run setup prompt, and they run with limited account credentials.
+- Simplified the model-change notice in conversations to state only the model swap, removing the confusing "Reused from cache last turn" figure.
+- Tab rows in every panel now share one design: tabs shrink evenly while keeping their names, show a close button on hover, and "+" opens a tab search instead of the "…" overflow menu
+- The Home Slack suggestion now opens the Slack connector in Customize instead of the manual MCP server dialog.
+
+### Fixed
+
+- "Create and run" on a local automation now runs the automation you just created, not one created elsewhere at the same time.
+- `.worktreeinclude` no longer copies files inside submodules or files already tracked by Git into new session worktrees, so submodule setup no longer fails and deleted files are not restored as untracked files
+- A chat no longer keeps showing as failed in the sidebar after a turn error once its next turn has started
+- A code block left unclosed at the end of a message no longer sends its fence label (such as `filename=b.ts`) as the first line of code
+- A fullscreen Mermaid diagram now updates to the new colours when the system theme changes, without a false "Reload diagram" prompt or losing your zoom and pan.
+- A local session whose plugin custom agent can't be loaded after a plugin update now offers "Continue with default agent" instead of staying unavailable
+- A long answer typed into an agent question now stays readable as it wraps, instead of sliding under the fade at the bottom of the choices
+- A pasted quote with several paragraphs or a list now keeps them apart when the message is sent with an attachment or reference, instead of running them together
+- A plan task left in progress no longer keeps spinning in the plan and the Overview task list after the agent has finished working.
+- A queued message's More options menu now closes when the queue changes, so a click can no longer land on Edit for a message that was just sent.
+- A Side chat open in the right panel now comes back after reloading or restarting the app instead of staying stuck on "Resuming chat"
+- A space before or after the search text in a My work filter picker (Label, Author, Assignee or Repository) no longer hides matching options or shows No results found
+- Activating the Scroll to bottom button in a conversation now moves keyboard focus to the transcript, so a focus indicator stays visible and PageUp and the arrow keys keep scrolling
+- Activating the updates bar in My work now moves keyboard focus to the first new item in Table view, instead of leaving nothing focused
+- Active automation runs now show pending permission and approval requests instead of staying on "Loading run" before any messages arrive.
+- Added a Try again button for local MCP servers that fail to start, so you can retry after fixing the problem without restarting the app or toggling the server
+- Adding a local folder or repository that was previously hidden from the sidebar now shows it, instead of the new row briefly appearing and vanishing.
+- Adding a repository's old folder after using Reconnect checkout now adds the folder as its own repository instead of reopening the moved one.
+- Adding an MCP server from a repository no longer prefills an unresolved `${VERSION}` placeholder from the repository's template manifest, and falls back to the repository's remote server when available.
+- After closing an issue with a different reason, the comment box now shows Reopen issue instead of Close issue
+- After turning on Markdown source from the editor's right-click menu, the menu keeps keyboard focus and pressing Escape returns to the editor with the cursor where it was, instead of at the top of the text
+- Agent merge no longer merges a pull request whose base changed after the merge check left it with no changes
+- An error logged by an extension no longer dismisses pending permission prompts or questions, or marks a still-running session as stopped
+- App-bundled skills that were deleted from disk are now restored when you re-check skills or relaunch the app
+- Approving a plan that was already answered, for example by a coordinating session, now says the plan is no longer waiting for an answer instead of failing silently and switching the session to Autopilot
+- Archiving a session along with its nested sessions now also archives the chats started from it, instead of leaving them loose under Chats.
+- Archiving a session or removing a project with "Delete local files" now warns about new files inside submodules and nested repositories, even when your Git config sets `status.showUntrackedFiles = no`.
+- Archiving a session with "Delete local files" no longer fails when its sparse-checkout worktree contains new files outside the checked-out directories
+- Archiving or deleting the first session in the sidebar now moves keyboard focus to the next session instead of jumping to the Projects section.
+- Arrow keys and Enter now edit the text of an image annotation comment instead of moving the comment box
+- Automatically generated session names no longer show stray Markdown asterisks around the title
+- Automation runs whose worker fails are now recorded as failed instead of succeeded
+- Automations no longer list skills the agent cannot load because of a non-boolean user-invocable or disable-model-invocation value or a malformed allowed-tools value; they now show the reason instead.
+- Automations now list skills with `---` in their descriptions correctly, and no longer offer skills that fail to load
+- Automations with more than 100 runs now show their real run count, and links to older runs open instead of reporting the run as missing from history.
+- Autopilot now approves read-only shell commands such as cat and grep on files in folders added to a session as sources, matching how file reads in those folders already work
+- Azure DevOps canvas description and comment editors now include the complete formatting toolbar and compact Cancel/Save buttons
+- Backslash-escaped Markdown links, such as `\[docs\](url)`, now stay literal text in the message box and in the sent message instead of turning into links with stray backslashes
+- Canvases from installed plugins now show the plugin's own logo in Customize, Open Canvas, session menus, the sidebar and Canvas titles instead of a generic icon
+- Changes counts and the default Changes view for sessions with an open pull request now reflect the pull request's branch diff instead of including large untracked workspace files
+- Changing a repository setting no longer overwrites a committed .github/github-app.yml that you haven't accepted yet or that can't be parsed, such as one with merge-conflict markers.
+- Chats started by another chat are now nested under that chat in the grouped sidebar's Chats group instead of appearing as a flat list.
+- Checkbox items in menus now show the pointer cursor when the Show pointer on hover accessibility setting is on, like the other items in the same menu
+- Choosing "is between" on a Comments filter now applies the range you enter instead of saving "is greater than"
+- Choosing Update authorization for an account in Settings now keeps keyboard focus inside the Settings dialog
+- Clicking Send now on a queued message while another message is still being sent now waits and sends it once the session is free, instead of failing with a raw error.
+- Cloud session diff counts now include removed lines that start with `--` and added lines that start with `++`.
+- Cmd/Ctrl-clicking a session link in a Markdown document in the editor now opens that session.
+- Code blocks fenced with tildes (`~~~`) in the chat composer are now kept as code when pasted, recalled from history, or switched back from Markdown source, instead of being reformatted as Markdown.
+- Code mixing Latin with Cyrillic or Greek text now stays aligned in the Changes view
+- Command output containing backticks is now shown and copied exactly as printed, instead of being turned into inline code
+- Comment box formatting toolbar no longer cuts off its list, indent and table buttons in narrow windows; buttons that don't fit now move into the "More formatting options" menu
+- Copilot no longer disappears from Reviewers while its review request is still pending
+- Create PR now comes back after pushing follow-up work on a session whose pull request has already merged
+- Creating a repository in a personal account that your enterprise doesn't allow now explains the restriction and suggests choosing an organization as the owner, instead of showing a generic error.
+- Creating a repository without a README no longer fails when Git has no user name or email configured
+- Creating a worktree workspace no longer fails with "git-lfs is required" when a repository's .gitattributes only mentions Git LFS in commented-out lines
+- Ctrl+B and Ctrl+U in the message composer no longer trigger both text formatting and app shortcuts on non-Latin keyboard layouts such as Russian, Ukrainian, Greek, and Hebrew
+- Ctrl+C and Ctrl+Shift+C in the terminal now copy the selection instead of interrupting the running command on Russian, Greek, Hebrew and other non-Latin keyboard layouts
+- Ctrl+letter keyboard shortcuts now work on Windows and Linux when the keyboard layout types a non-Latin script, such as Russian or Greek.
+- Ctrl+Z and Ctrl+Y now undo and redo in the screenshot annotation editor on Windows and Linux with Russian, Greek and other non-Latin keyboard layouts.
+- Custom headers on a model provider are now sent when browsing, refreshing, or testing its model catalog, so providers behind a gateway no longer fail with an "Invalid API key" error.
+- Deleting a cloud session right after its environment stops or goes idle now waits and retries instead of failing with "Delete failed".
+- Discarding a screenshot annotation in the browser preview now exits Pick & Polish instead of returning to pick mode.
+- Discarding or sending a queued message just as it starts sending now says it was no longer in the queue, instead of a raw error
+- Dismissing the usage warning above the message box with the keyboard now moves focus to the message box instead of dropping it.
+- Dotted names such as `@app.route` or `@functools.lru_cache` in a conversation are no longer turned into links to unrelated GitHub profiles
+- Draft "Pull request created" cards now show the draft icon instead of the green open pull request icon
+- Each account's menu button in Settings > Accounts now has a distinct accessible name that includes the account, so screen reader and voice control users can tell them apart
+- Editing a project automation's schedule no longer brings back Custom minutes you cancelled earlier when you switch from Hourly to Custom; Custom now starts from the saved schedule
+- Emoji shortcodes written right after an @mention or issue reference, such as `thanks @octocat:tada:`, now render as emoji like on github.com
+- Escaped Markdown in the chat message box, such as \# not a heading or \[ ] not a task, now stays plain text when you edit, switch Markdown source off, or restore a draft.
+- F6 and Shift+F6 now cycle through all app regions while a notification toast is on screen.
+- Failed automation runs keep showing as failed, with their error, after their session is archived or deleted
+- Failed commits now show Git's explanation instead of "git command failed with no error output", such as when the only changes are inside a submodule.
+- File edit previews in remote sessions no longer replace a single unchanged line with a "1 unchanged lines omitted" row; the line is shown instead.
+- File mentions in earlier messages whose path contains a double-bracket segment, such as `app/[[...slug]]/page.tsx`, now show as one correct file pill that opens the full path.
+- File reads that hit the size limit no longer show the truncation note as extra numbered lines, so the line range label and line numbers match what was read.
+- Filtering logs by level in Health check now shows the full multi-line log entry instead of only its first line
+- Find in a chat no longer counts or steps to matches inside Markdown link URLs that aren't shown, so match counts and highlights line up.
+- Find in rendered Markdown no longer counts or steps to matches inside the source of a Mermaid diagram, so the match count and highlighted result agree with what is shown on screen.
+- Find now announces its result count and "No results" to screen readers, including when stepping between matches.
+- Find now opens collapsed details blocks in Markdown (chat replies, plans and files) so the current match is visible and highlighted.
+- Fixed /agent selecting a custom agent marked user-invocable: false, which the agent list hides, when typed before a session starts
+- Fixed /agent with no custom agents pointing at an agent list that isn't shown, and long notification titles overflowing the window or running under the close button
+- Fixed /model in the classic composer opening the model picker instead of selecting a model by its exact ID when a provider model is named with that ID
+- Fixed a "Could not manage plugins" error appearing on top of the administrator screen when your organization has turned off the GitHub Copilot app.
+- Fixed a crash in Customize on older system WebViews when closing an MCP server's details or installing a new MCP server
+- Fixed a crash when a Copilot CLI extension asks to read sensitive environment variables; the app now shows a permission prompt to share or decline them.
+- Fixed a crash when PHP code blocks are highlighted in the prompt composer
+- Fixed a crash when rendering markdown containing very large amounts of unfenced XML or deeply nested HTML
+- Fixed a Customize plugin switch briefly snapping back to its old value while a toggle was still in progress.
+- Fixed a doubled period in the approval prompt when a remote host's safety assessment reason already ends in punctuation
+- Fixed a GitHub Sandbox connection timeout at session start showing as a worktree failure with a raw transport error; it now says the connection timed out and suggests checking your network, VPN, proxy or firewall before trying again
+- Fixed a linked pull request comment scrolling out of view after nearby comments finished rendering.
+- Fixed a new chat sometimes failing to start with "GitHub account changed during session startup" when a connected Azure DevOps account's sign-in was refreshed in the background
+- Fixed a plugin switch in Customize sometimes flipping back off right after its toggle was confirmed.
+- Fixed a question that an extension answered reappearing as waiting after the app reconnected, and keeping its session marked as waiting for input
+- Fixed a renamed chat showing its old name again in the sidebar when the chat list refreshed at the same moment.
+- Fixed a stale "Session unavailable" banner that stayed visible after answering a restored question and the session had already recovered
+- Fixed Add server for a GitHub MCP server offering only the first endpoint or package of each server type
+- Fixed Agent merge checking a workspace that has no pull request yet every 5 seconds instead of once a minute
+- Fixed an error when rendering or copying messages containing tens of thousands of lines in a single paragraph
+- Fixed Archive merged PRs in a Project Overview deleting an automation that runs in one of those sessions without asking first
+- Fixed blank space accumulating in conversations above progress indicators such as "Resuming session" after hidden background tool calls.
+- Fixed child sessions dropping out of Pinned when their pinned parent session is deleted; they now stay pinned in the parent's place.
+- Fixed Ctrl+Shift+Tab (Previous tab) doing nothing while a terminal had focus, and typing a stray back-tab into the shell instead
+- Fixed Customize not listing a skill added to a repository while the app was running until another part of the app reloaded the skills list
+- Fixed Edit and rewind leaving the agent's new files behind and breaking the Changes panel in repositories with submodules when Git's submodule.recurse is on
+- Fixed editing a cloud automation splitting a saved workflow name that contains a comma, which stopped the automation from running when that workflow failed
+- Fixed empty projects in the sidebar sometimes showing "Loading sessions..." until the app was reloaded
+- Fixed external links and MCP server sign-in opening File Explorer instead of the default browser on Windows.
+- Fixed Find in a chat's Files tab searching the conversation instead of the open file
+- Fixed GitHub sign-in errors showing the same message for every network failure, or a raw HTML error page, instead of the cause
+- Fixed Home suggestion cards taking keyboard focus back from Quick Open or another control while the prompt was still filling
+- Fixed in-place sessions ignoring a git workflow set in your own instructions, such as making every change on a new branch or in a worktree session and opening a pull request
+- Fixed keyboard focus being lost when tabbing out of a sidebar session summary on older macOS versions.
+- Fixed keyboard focus leaving the sidebar after archiving or deleting a session or chat from its menu
+- Fixed large read-only Markdown files on Windows cutting off the leading digits of ordered list numbers from 1000 up.
+- Fixed Linux desktop notifications dropping or reformatting code-like text such as `Vec<T>`, a < b or &lt; from the agent's reply
+- Fixed long typing pauses while a large Mermaid diagram appears in a conversation
+- Fixed Mermaid class diagrams drawing a class declared with :::css as two boxes, and ignoring annotations written before the class name, class labels and backtick-quoted class names
+- Fixed Mermaid class diagrams dropping dashed links such as A .. B and A *.. B, and drawing an arrowhead on plain links such as A -- B
+- Fixed Mermaid class diagrams showing attributes written as name: type, such as +name: string, with the name and type swapped
+- Fixed Mermaid flowcharts dropping lengthened, circle, cross and invisible links, ignoring a node label given on a later line, misreading parallelogram shapes and drawing stray boxes for click and accTitle lines
+- Fixed Mermaid state diagrams ignoring a state's description when it is written after the state's first transition, keeping only the first of repeated descriptions, and drawing a stray box for a composite state's description
+- Fixed Mermaid XY charts showing quote marks in axis labels, splitting a quoted label that contains a comma, and dropping series that have a name
+- Fixed missing spacing between sidebar sections when Pinned or Recent is collapsed
+- Fixed old automation reports repeatedly appearing after the newest turn in an agent's conversation, and automation runs being wrongly reported as interrupted when the worker finished idle.
+- Fixed onboarding ignoring a model provider save that waited more than 15 seconds on the keychain password prompt, which left the step stuck and made a retry add a duplicate provider
+- Fixed pull requests not refreshing when their base branch has a ruleset that requires resolving secret scanning alerts, which left the pull request panel showing an outdated base branch, stack position and merge status
+- Fixed pull requests opened from a completed automation run showing "No matching GitHub account" and a disabled Comment button in the Reviews tab
+- Fixed refreshing an account's authorization sometimes staying on "Waiting for authorization..." after the browser sign-in had already succeeded
+- Fixed Retry failing to start a new chat for up to 10 minutes after the Copilot account lookup failed at launch
+- Fixed reusable worktree cleanup failing after a repository was moved and reconnected, which blocked removing the repository.
+- Fixed screen readers not identifying the highlighted suggestion in the issue and pull request, session, file, emoji and user mention menus
+- Fixed secret gists shared from a session or reply being named after only the text following the last slash in the session title
+- Fixed sessions failing to resume with "Session unavailable" when their worktree was left on a detached HEAD.
+- Fixed sessions failing to start on environments published by the Copilot CLI with a "config key `target` is not supported" error
+- Fixed sessions that kept showing a running timer and Stop button after the app reconnected following a backend restart mid-reply; the session now returns to idle with Send available.
+- Fixed sorting Manage sessions by Disk usage with more than 50 sessions leaving out large sessions beyond the 50 most recent, because their size was never measured
+- Fixed spreadsheet data validation failing on workbooks with very large validation ranges, such as whole columns
+- Fixed starting a side chat or resuming a session failing when its worktree's branch had changed or HEAD was detached
+- Fixed the browser panel lagging behind or showing a doubled scrollbar while dragging the side panel divider with several busy sessions.
+- Fixed the Changes diff numbering lines too low after each blank line, and leaving blank lines unnumbered, when git's diff.suppressBlankEmpty setting is on
+- Fixed the chat composer moving a code block or paragraph out of a nested list item and adding an empty list item each time you switch out of Markdown source
+- Fixed the chat composer moving a paragraph out of its list item when switching out of Markdown source or recalling a prompt.
+- Fixed the Commit button staying on "Committing…" when a commit succeeds but the repository can't be read right afterwards: the button now comes back and a message says the commit landed but Git status couldn't be refreshed.
+- Fixed the conversation scrollbar sometimes not appearing after late-loading content was added to the transcript
+- Fixed the conversation shifting the text you were reading when older history loads above it.
+- Fixed the first Project's repository picker staying on screen with an empty list, saying no repositories match, after you write in the composer instead
+- Fixed the Make Copilot yours card covering the sidebar Settings and Share feedback buttons in narrow windows
+- Fixed the message box losing focus after reviewing trust prompts, and closing a task tab now keeps focus on the chat and restores your cursor position in the draft
+- Fixed the message composer moving a list item's paragraph out of its list when the next item follows directly, without a blank line in between.
+- Fixed the Microsoft Foundry provider form erasing a typed API key when you re-select API key authentication or arrow between authentication options.
+- Fixed the New automation dialog getting stuck in a saving state when an automation couldn't be saved; it now shows the error and lets you retry or cancel.
+- Fixed the Pull requests and Issues tabs of a repository's pages being cut off in a narrow window or at high zoom, where the Issues tab could disappear entirely
+- Fixed the scrollbar in the file viewer being sized for only part of a very large Markdown file, so dragging it to the bottom now reaches the end of the file
+- Fixed the sidebar's multi-session selection not clearing when you click outside the selected sessions
+- Fixed the Stop button disappearing when the window reloads while the agent is still working; the conversation now comes back still working, and the turn can be stopped.
+- Fixed the Stop button staying on screen and the session appearing busy after taking back or discarding queued prompts
+- Fixed the terminal staying blank after a failed start was retried, such as when renaming the session.
+- Fixed the transcript jumping when you start editing a message in a session below the first row of the session grid; a message that is already on screen now stays where it is.
+- Fixed the trigger details of cloud automations that run on both pull request comment types, which now read "Timeline comment, Review comment" instead of "Pull request comment timeline comment, review comment"
+- Fixed the user menu's Theme > Make it yours item staying disabled when Settings was available, so it now opens the Themes settings.
+- Fixed Windows automatic updates sometimes showing an unexpected uninstall confirmation instead of updating quietly
+- Fixed Windows PowerShell terminals showing a script signature warning on startup when the execution policy is RemoteSigned
+- Forked sessions whose files change before you first open them now offer Merge to parent.
+- GitHub alerts written with mixed or lower-case markers such as `[!Note]` or `[!warning]` now render as callouts instead of plain quotes
+- GitHub Enterprise Cloud sign-in now shows an inline error for invalid addresses (such as a username with an underscore, a wildcard, or a port) instead of failing after a network request.
+- Going Back during onboarding no longer causes a later Back or Forward to jump to Home.
+- High contrast mode no longer makes body text paler than Default mode in community themes
+- High contrast mode no longer makes error, success, warning and accent-colored text harder to read than Default mode in community themes
+- Holding the reasoning effort shortcut no longer queues repeated screen reader announcements that delay later announcements by over a minute.
+- Images attached to pull request descriptions now load for private repositories when the repository is linked to a non-default GitHub account
+- In a project added from a repository subfolder, file references in agent replies such as `package.json` or `src/routes.ts:12` now open the file in that subfolder instead of the repository root.
+- In a repository's Code tab, opening another file while Find is open now starts at that file's first match instead of the previous file's match number.
+- In a repository's settings, Cancel and Disable on the "remove the current spare" confirmation for reusable worktrees now return keyboard focus to the Keep one worktree ready switch, instead of sending it to the top of Settings.
+- In an existing session, the model picker's Auto switch now says when no other models are available to switch to, instead of silently ignoring the click.
+- In Assisted mode, sessions that an agent delegates work to now honor what you authorized in the parent session, so delegated work is no longer refused or left waiting on a prompt.
+- In repository Settings > Scripts, pressing Escape on the remove confirmation or the add/edit script form now closes only that surface instead of the whole Settings dialog, and keyboard focus now moves to the right place after editing, saving, cancelling, adding or removing a script.
+- In Settings > Accounts, canceling or retrying an account sign-in with the keyboard now keeps focus where you were, instead of sending it back to the top of Settings.
+- In split diff view with Wrap lines off, scrolling sideways to read a long line no longer slides the other side's shorter lines out of view.
+- Inline code at the start of pasted text or a restored draft no longer loses its backslashes in the composer
+- Installed canvases now appear in the right panel's Canvas menu before you send your first prompt in a workspace, and picking one starts the session and opens it.
+- Installing a canvas extension from a GitHub repository or folder whose name contains a dot, or from a repository with a long name, no longer fails with an extension name error
+- Interrupted connector tasks now automatically resume after authentication recovers when the native runtime wrapper is disabled
+- Issue and pull request sessions started by an agent now inherit the permission mode of the session that started them, instead of using your default for new sessions. While a repository is untrusted, Copilot asks before an agent in it starts another session.
+- Keyboard focus and screen readers now reach the unavailable Create button in the New automation dialog and announce why it is unavailable
+- Keyboard focus is no longer lost when an expanded composer panel, such as Background activity, closes on its own because its content went away
+- Keyboard focus is no longer lost when editing, saving, or canceling a model provider in Settings.
+- Keyboard focus now returns to the chat title after you rename a chat with Enter or Escape, instead of being lost.
+- Keyboard shortcut keys shown in tooltips are readable again in the light high contrast theme
+- Links that open in a new tab from pages in the browser canvas now work instead of doing nothing when clicked.
+- Links to Markdown headings that contain superscripts, subscripts, fractions, or non-breaking spaces now scroll to the heading when written with the anchor GitHub generates.
+- Local file paths and links in question cards from the agent can now be opened
+- Locked issues and pull requests, including those in archived repositories, now show a notice instead of the comment box to people who can't comment on them
+- Long code blocks in streaming replies no longer slow down and stutter as they grow
+- Long file paths and names in confirmation dialogs, such as discarding changes to a file, now wrap inside the dialog instead of running past its edge
+- Long sidebar session names now scroll on hover or keyboard focus right after you rename them, instead of staying cut off
+- Long words in My work Board card titles now wrap within the card instead of being cut off mid-character at the card edge.
+- Made the keyboard focus ring and focused text field outline easy to see on community themes where they were too faint against the background
+- Made the keyboard highlight in the command palette, autocomplete menus and select panels easy to see on community themes where it was too faint
+- Manage sessions now refreshes each session's disk usage when you open the page, so sessions that have grown show and sort by their current size.
+- Manage sessions now shows a session's disk usage just under 1 MB or 1 GB as 1.0 MB or 1.0 GB instead of 1024 KB or 1024.0 MB
+- Manage sessions now shows how many sessions exist when the list is limited to 50, with a Show all button to reveal older sessions.
+- Markdown editor formatting toolbar buttons now show a tooltip naming each button on hover
+- Markdown files saved with a UTF-8 byte order mark now show their frontmatter correctly in the preview and editor instead of as a horizontal rule and heading
+- Markdown files that start with a byte order mark now render LaTeX display math written as \[ ... \] instead of showing it as plain bracketed text
+- Markdown previews of files that start with a byte order mark now render GitHub alerts such as Note and Warning instead of showing them as plain quotes
+- Marketplace and MCP server status icons are now announced by screen readers and reachable with the keyboard
+- Menu buttons that are dimmed as unavailable, such as Browse… while skills are being found, no longer open their menu when clicked with the mouse
+- Mermaid diagram group titles that are long or span multiple lines are no longer cut off or drawn over the group's contents
+- Messages now stay bound to the chat they were written in, so a background selection change can no longer send them to a different chat, and Quick Open no longer restores an older chat over one you navigated to.
+- Messages that include a GitHub issue or pull request link now keep their Markdown formatting (inline code, bold, italic, links, and code blocks) when sent to the agent.
+- Multilingual dictation no longer inserts language markers such as `<es-ES>` into the preview or the prompt.
+- Nested checklist items in the Markdown editor keep their indentation after deleting the first item in the list
+- New files that aren't staged yet now show their added line count in the Changes view file header.
+- New folder sessions no longer offer the Files action in the right panel before the workspace is ready, avoiding an unavailable Files view
+- Numbered lists in the message box no longer cut off the first digit of long numbers, such as "1999."
+- Numbered lists that start above 1 in a message with a reference, attachment, or element chip now keep their typed numbers instead of being renumbered from 1
+- Numbered sub-steps pasted into the chat composer now keep their own numbering and are sent as a nested list instead of being renumbered
+- Numbers, dates, IDs and words in pull request and issue text are no longer turned into broken commit links; only text that names a real commit is linked.
+- On a touch screen, an issue artifact tab in a pull request no longer closes when you tap what looks like its icon; the close button now shows in the icon's place
+- On Home, Refresh suggestions and Hide suggestions in the suggestion cards menu now keep keyboard focus on the new card in the same place or on the message box, instead of dropping it.
+- On macOS, Ctrl+N and Ctrl+P now move the highlight in the composer's suggestion menus (slash commands, @ mentions, # references, and emoji)
+- On macOS, Ctrl+P and Ctrl+N now move the caret between lines in a multi-line answer to an agent question, plan feedback, or permission prompt instead of jumping to an option.
+- On Windows, the integrated terminal now respects a PowerShell execution policy set in your terminal profile with shortened switches such as -ex or -exec, instead of overriding it with Bypass.
+- On Windows, when a plugin update or uninstall fails because another program is using the plugin's folder, the error now names the folder in use
+- Open in Windows Terminal no longer runs part of a project folder name as a command when the name contains a semicolon
+- Open URL from clipboard now opens the repository when the clipboard holds a GitHub clone URL ending in .git
+- Opening a file from the Library's Folders view in a repository session now shows it in the Files tab, with keyboard focus moved there, instead of adding a background tab or a duplicate tab.
+- Opening a large text file in a repository's Code tab no longer freezes the window on Windows, and line numbers stay aligned with their lines in file previews
+- Opening a local session that is still working now loads its saved conversation history instead of showing only the live tail.
+- Opening a pull request by link no longer shows "No GitHub repositories yet" when no repository has been added
+- Opening a session link with a repository and a blank prompt now starts the session instead of doing nothing when you click Allow
+- Opening and closing find in a conversation with many code blocks no longer briefly freezes the window.
+- Opening License and Open Source Notices no longer freezes the app for a couple of seconds; the notices now appear right away and the dialog can be closed while they load
+- Opening long sessions, including forked, rewound, and remote ones, no longer freezes the window for seconds.
+- Pasted Markdown in the message box keeps bold, italic, strikethrough and inline code formatting when the formatted text wraps onto the next line.
+- Pasting a GitHub repository link wrapped in quotes, bold, backticks, or trailing punctuation now detects the correct repository, and links inside other sites' URLs are no longer mistaken for GitHub links
+- Pasting a sentence that ends in a repository link into the chat composer no longer deletes the period after the link
+- Pasting or typing a quote that contains a code block in the chat composer now keeps the code block, instead of turning it into quoted text with literal backticks.
+- People pickers (Author, Mentions, reviewers and assignees) no longer hide users the search found when their name has accents you did not type, or when you type their login with @
+- Permission prompts that were waiting for an answer now reappear after the window reloads or reconnects, so sessions no longer get stuck waiting on an approval you can't see.
+- Pinned sessions can now be reordered from the keyboard with Move up and Move down in the session's context menu
+- Plugin marketplaces that never respond in Customize now show an error with Retry after about 95 seconds instead of loading for minutes, and stay settled when you reopen Customize
+- Plugins installed from a local marketplace folder now appear in Customize > Installed, so you can turn them off or remove them.
+- Plugins installed, updated or removed outside the app (for example with the Copilot CLI) now apply to chats that are already open, so their MCP tools are available without starting a new chat or relaunching.
+- Plugins no longer briefly disappear from Customize and show Install again right after they finish installing.
+- Plugins you installed yourself now stay enabled in Customize when your organization's policy requires other plugins
+- Pressing Enter in Add GitHub repository now adds the highlighted repository after you open the destination picker.
+- Pressing Enter on Reset zoom in a session's Insights timeline no longer drops keyboard focus; focus moves to Zoom in.
+- Pressing Enter or Space on a diff gap's Expand up or Expand down button no longer loses keyboard focus when the gap is fully revealed.
+- Pressing Enter or Space on Copy file path, Open file in a new tab, or Expand full file in a diff file header now runs the action instead of collapsing the file
+- Pressing Esc to close an input method's candidate list while editing a comment or description no longer cancels the edit and discards your text.
+- Pressing Esc to close the candidate list of a Japanese, Chinese or Korean input method no longer clears your Library search
+- Pressing Esc to dismiss input method candidates (Japanese, Chinese, Korean) in the MCP server and model provider forms no longer cancels the form and discards what you typed
+- Pressing Esc to dismiss input method candidates while writing a pull request review comment no longer closes the comment and discards what you typed
+- Pressing Esc while typing a comment on a screenshot no longer discards the whole annotated image; it finishes the comment instead.
+- Pressing Escape in a Model providers search picker with no results now closes only the picker instead of all of Settings
+- Pressing Escape in the Add model or Edit model form in Settings > Model providers now cancels only that form instead of closing Settings, and keyboard focus returns to the button that opened it.
+- Pressing Escape on a palette card in Settings > Themes and graphics no longer resets your palette to GitHub; it now just closes Settings.
+- Pressing Escape on a Remove confirmation in Settings > Model providers now closes only the confirmation instead of all of Settings, and keyboard focus stays in place after Cancel or Remove.
+- Pressing Escape on the "Keep one worktree ready" disable confirmation in repository settings now cancels only the confirmation instead of closing all of Settings
+- Pressing Escape on the Remove account confirmation in Settings > Accounts now closes only the confirmation instead of all of Settings, and focus returns to the account's actions button.
+- Pressing Escape to close an input method candidate list while answering the agent's question or filling in a form no longer skips the question or cancels the form
+- Pressing Escape to close an input method's candidate list while editing a message no longer cancels the edit and discards your changes.
+- Pressing Escape to close input method candidates while naming a view in My work, Issues, or Pull requests no longer cancels the editor and discards the view
+- Pressing Escape to dismiss the "Copy to clipboard" tooltip on the sign-in device code no longer cancels sign-in
+- Pressing Escape to dismiss the F6 navigation tip no longer moves keyboard focus to Settings when focus was elsewhere.
+- Pressing Up or Down in a typed answer that wraps onto multiple lines now moves the cursor instead of selecting one of the agent's options, so Enter sends what you typed
+- Previews of very large pasted text no longer end with a stray replacement character when the size limit cuts through a multi-byte character.
+- Project automation titles now use the full available row width instead of being cut off early with an ellipsis
+- Project unread indicators and open side panels are now preserved after restarting the app
+- Questions the agent asks in the chat now render Markdown, so links are clickable and inline code is styled
+- Queued messages are no longer sent while the Stop confirmation is open, so choosing Stop and discard after the reply finishes discards them instead of stopping the reply to one of them.
+- Quick Open no longer lists the same pull request more than once, so other matching pull requests are no longer pushed out of the results
+- Quitting no longer warns about a session whose only open prompt is a browser permission raised between turns
+- Re-run and Cancel are no longer offered on GitHub Actions checks in repositories where you only have read access, avoiding a 403 error toast
+- Read-only shell commands that follow symlinks into folders outside the working directory, such as `grep -R` or `find -L`, now ask for permission instead of being approved automatically.
+- Recreating a session's worktree no longer discards unpushed commits on the session branch
+- Recreating a session's worktree or retrying a failed worktree checkout now honors the repository's Worktree sparse-checkout setting instead of checking out every directory
+- Removing a personal skill whose file changed while its Remove confirmation was open now explains what happened and lets you remove the latest version, instead of failing with a message about saving
+- Renaming a session in Manage sessions now saves the typed name when you press Tab or click away, instead of discarding it
+- Renaming a session, project or custom section from the sidebar with the keyboard now returns focus to its row instead of dropping it to the page
+- Repositories cloned at a Windows drive root (such as D:\repo) are no longer labeled with a mangled drive path like D:/repo in the sidebar, repository pickers, Quick Open and the tray menu
+- Repositories cloned over SSH on port 443 (ssh.github.com) are now recognized as GitHub repositories, so pull requests and repository settings work for them.
+- Repository README files with long links or badge URLs now render as Markdown instead of plain text
+- Repository Sandbox settings now save changes even when a listed folder no longer exists, and errors name the folder that couldn't be resolved
+- Repository settings now show which skills couldn't be loaded and why, instead of silently omitting them or hiding the Skills section.
+- Resetting the terminal font, palette, keyboard shortcuts, default branch prefix or storage location in Settings with the keyboard now keeps focus next to the setting instead of dropping it to the top of Settings.
+- Restored the Close and Reopen pull request actions in the comment box of the tabbed pull request view.
+- Restored timeline-only navigation in ordinary conversations, removing the extra history slider that appeared next to the timeline markers
+- Returning to a long conversation that kept growing in the background now keeps you at the latest message instead of scrolling far above it.
+- Review comments left on a whole file are no longer shown as comments on line 1 in the conversation, the Files view, or the Fix prompt.
+- Review comments that span both removed and added lines now show the full range of changed lines in the pull request conversation
+- Right-panel tab order is now remembered when you leave a session and come back
+- Running /clear while a session is still answering now says to stop the response or wait for it to finish, instead of wrongly reporting that a clear is already queued.
+- Running /restart-session while a session is still responding now says to stop the response or wait for it to finish, instead of wrongly reporting that a restart is already in progress.
+- Saving a model provider no longer adds a provider without an API key when the system keychain rejects the key
+- Saving a model's max prompt or output token limit with text that isn't a number now shows a validation error instead of silently removing the existing limit.
+- Saving a skill in Customize no longer rewrites untouched lines of its SKILL.md with backslash escapes
+- Saving a skill in Customize no longer rewrites untouched table rows, code fences or nested list items in its SKILL.md
+- Saving an edited personal skill no longer doubles the backslashes in lines you didn't change, such as Windows paths and regex patterns.
+- Saving an issue title no longer overwrites a rename made on GitHub while you were editing; the save is refused with a message instead
+- Scoped npm package names like @tauri-apps/api in Markdown no longer link part of the name to an unrelated GitHub user.
+- Screen readers name each issue and pull request comment's actions menu after the comment's author, instead of announcing every one as "More actions"
+- Screen readers no longer announce an unnamed dialog and empty lists around composer suggestion menus (slash commands, skills, files, issues, pull requests, sessions, users and emoji)
+- Screen readers no longer find a status message inside the My work and Dashboards tab lists; those lists now contain only their tabs
+- Screen readers no longer read Markdown symbols and link URLs in the hidden "You said" and "Copilot said" headings of chat messages.
+- Screen readers now announce a failed commit list load in the Changes panel immediately as an error, including what failed
+- Screen readers now announce a heading and a named list for the Issues and Pull requests lists, so you can jump straight to the items.
+- Screen readers now announce each Checks status bar segment in the pull request sidebar with its count (for example, "1 failed") instead of just "button".
+- Screen readers now announce query suggestions and the highlighted option in the My work query filter and automation filter field
+- Screen readers now announce the number of palettes found when you choose a family filter or clear filters in Settings > Themes and graphics.
+- Screen readers now hear "No results found" once, instead of twice, when a Quick Open search matches nothing
+- Screenshots the agent shows with Windows backslash paths in chats on remote Windows hosts now render instead of appearing as "image not shown"
+- Searching Issues with an `is:pull-request` or `type:pull-request` qualifier no longer shows pull requests in the Issues list
+- Selecting a commit in a pull request's Files tab no longer scrolls the selected-commit banner out of view
+- Selecting text by dragging in the Markdown editor no longer reveals the Markdown source and shifts the text under the pointer.
+- Selecting text in the chat no longer blanks or freezes an open pull request or browser preview panel beside it.
+- Session names now keep your capitalization for words like MAI2, MCP, iOS, and GitHub instead of lowercasing them
+- Setting up copilotd on WSL, an SSH host or this Linux machine now installs the GNU build when glibc is supported, even if a musl loader is also installed, so sessions there no longer fail to start
+- Settings now shows the correct organization avatar for repositories hosted on GitHub Enterprise Cloud with data residency.
+- Show boundaries between separate diff sections in patch output and review snippets.
+- Showed one card per Office document in a response, instead of a card for every step that created, opened or showed the same file
+- Sidebar session summaries no longer close when the pointer passes over them while keyboard focus is inside
+- Signing in to an MCP server can now be retried right away after a failed authorization, instead of being blocked as already in progress.
+- Slash commands that installed extensions register, such as /eval, now appear in the / menu on Home before you send the first message, and picking one runs it when the chat starts.
+- Sorting by the Laugh and Confused reactions in My work now orders items by those reactions instead of leaving them newest first
+- Sorting Sessions by a column such as disk usage now orders repository groups to match, instead of keeping them in manual order.
+- Split tab panels now give each tab strip a distinct screen reader name (for example "Workspace tabs, pane 1 of 2")
+- Starting a new session on a branch with a long name containing non-ASCII characters, such as Japanese, no longer fails with a "file name too long" error.
+- Starting a session from Home with a link to a repository you haven't added yet no longer removes other links, issue references, or line breaks from your prompt.
+- Static SVG images, such as default matplotlib charts and Rich terminal exports with web fonts, no longer fail to load in the canvas with an "active or remote content" error.
+- Suggested changes in pull request review comments that use a longer code fence (for example, to include a code block) now show in full instead of being cut off at the first inner code block.
+- Suggested changes that replace lines with blank lines or delete them are now shown in pull request review threads
+- Switching back to a conversation now shows its Mermaid diagrams right away instead of briefly showing "Rendering diagram…" while each one is laid out again
+- Switching to a model whose context window is smaller than the current conversation no longer fails with a "Model not changed" error. The change waits for your next message, which compacts the conversation and then switches the model. With Minimal verbosity, model changes now stay visible outside the collapsed "Worked for …" summary of a turn.
+- Switching to a very long conversation from the sidebar is now fast instead of slowing down as the conversation's history grows.
+- Symlinks to files inside the repository, such as CLAUDE.md pointing to AGENTS.md, now open in the Files tab and appear in the Files filter and @ file mentions
+- Tab rows that overflow now show scroll arrows at the edges, and a regular mouse wheel scrolls them sideways, so every tab, such as the later views in My work, is reachable.
+- Tabbing back through a running subagent's activity no longer snaps the panel to the bottom and scrolls the focused row off screen
+- Task lists in rendered Markdown are now announced correctly by screen readers: links inside tasks are no longer reported as disabled, and each checkbox is named after its own task instead of its sub-tasks.
+- Task status icons in the Plan tab are now vertically centered with the first line of their labels
+- Task-list checkboxes in a pull request or issue description are now read-only when you don't have permission to edit it, instead of failing with a "Could not update task" error.
+- Terminals in a project added from a repository subfolder now open in that subfolder, where its sessions run, instead of at the repository root.
+- Text like `fe80::a:b:1`, `Foo::new::bar` and `1:100:2` is no longer turned into emoji in titles, comments, assistant replies, Markdown previews and labels, matching github.com
+- The "Repository account needs attention" notification now names the affected project and appears once per project instead of stacking up on every background refresh.
+- The "Session unavailable" reconnect error no longer stays on screen after a local session has recovered and is working again
+- The "Set to status" filter for the "Issue status changed" automation trigger now shows status names instead of numeric IDs
+- The "Usage blocked" and Copilot usage banners no longer appear in chats that use a model from your own provider.
+- The Add provider button in Settings > Model providers is no longer cut off when the window is narrow or zoomed in
+- The Automations page no longer shows an empty Skills section when you have no personal or repository skills
+- The Automations skills list now includes skills kept in a repository's .claude/skills folder, and shows the copy the agent actually runs when names overlap
+- The blue drop indicator now appears above document dialogs when dragging to reorder checklist items.
+- The branch picker shows that it is loading while a branch search is in progress, instead of saying no branches matched, and says it could not load branches when the search fails
+- The browser panel's address bar now explains why an address can't open (invalid URL, embedded username or password, or unsupported host characters) instead of always saying only http, https, and file URLs are allowed.
+- The Cancel button in the Install plugin dialog now matches the size of the Install button beside it
+- The Changes diff keeps its syntax highlighting when another file is saved, instead of briefly losing colours while unchanged files are re-highlighted
+- The Changes diff no longer drops its syntax colours for as long after every save while a file is in view.
+- The Changes diff no longer goes blank for a moment on every save while it is scrolled below its first rows
+- The Changes panel now lists a branch's commits when git's log.showSignature setting is enabled and the branch contains signed commits
+- The Commit button no longer saves an untracked nested Git repository as an empty submodule pointer. It now leaves the repository out, commits everything else, and shows a notice naming what was skipped.
+- The conversation timeline in long conversations now starts at its normal height instead of appearing short and growing once the full history loads
+- The Create PR button on project agent rows now appears for sessions with uncommitted changes without needing to open each session first.
+- The file tree toggle now keeps a single name ("File tree") and reports whether it is on, so screen readers and voice control no longer see a different button after each press
+- The GitHub Dimmed palette now appears when filtering palettes by family in dark mode
+- The GitHub Enterprise Server address field now ignores leading whitespace on pasted addresses and shows a clear message when the address is missing https://.
+- The health check now tells screen reader users when some checks need attention instead of announcing that all checks passed while GitHub auth or another check failed.
+- The image preview now picks up images that finish loading while it is open, so Next and the arrow keys can reach them
+- The Insights tab now counts `apply_patch` edits as Edit and agent tools like `create_session` as Agent instead of Other or Edit
+- The Insights timeline axis now labels ticks with round elapsed times (0s, 1m, 2m…) instead of offsets skewed by the session's start time.
+- The Issues tab is no longer shown on repositories that have issues disabled
+- The message box now shows "Steer this session…" consistently while a session is running, both in the main conversation and in the side panel.
+- The Plan panel now hides only the Todos list when tasks are tracked, instead of also hiding neighboring sections, and no longer leaves a stray empty heading or corrupts plan.md when editing the plan source.
+- The pull request merge drawer no longer offers Re-run, Cancel, Ready for review or Convert to draft to viewers who don't have permission to use them.
+- The Run button's "Configure in settings" and "Configure scripts" options now open repository settings at the Scripts section instead of the top of the page.
+- The session reconnect notice now shows a clearly visible Retry now button and explains when automatic reconnection has stopped.
+- The sidebar session summary is now reachable with the keyboard, even without links. Tab and Shift+Tab move in and out of it in order, and Escape closes it and returns focus to the session row.
+- The sidebar's resize highlight is no longer partly washed out where the session list's scroll fades meet it
+- The tray menu no longer says "Ready to merge" for pull requests still blocked on a required review or pending checks, and now shows the review status for approved and awaiting-review pull requests.
+- The tray menu no longer shows an empty "Checks:" row when every pull request check was skipped or cancelled, and now counts skipped or neutral checks alongside passed ones
+- Tray menu actions Create Pull Request, Fix Failed Checks and Resolve Comments no longer discard the text you typed in the session's composer; your draft is kept as the command's instructions instead.
+- Triple-clicking a paragraph or code line in chat now selects it fully instead of being interrupted by the selection menu opening after the double-click
+- Turning off a plugin in Customize no longer blocks other plugins’ switches, and disabling a plugin completes much faster.
+- Typing `/agent` followed by a plugin agent's name as shown in the agent list (for example, `/agent Code Reviewer`) now selects that agent instead of reporting that no agent matches.
+- Typing `type:issue` or `type:pr` in a repository's Pull requests or Issues query filter no longer mixes the other item type into the list.
+- Typing a number with a comma, such as 1,000, into a cloud automation's AI credit limit now shows "Enter only digits and a decimal point" instead of a misleading out-of-range error.
+- Typing at the start of a heading that follows the Todos list in Edit plan source no longer splits the line or saves the text as a separate paragraph
+- Typing in Search settings no longer freezes the app for a second or more on each letter when you have many repositories
+- Typing lowercase "not", "or" or "and" in the Issues and Pull requests query filter no longer turns them into search operators, so results match what you typed.
+- Undo, Select all and Save shortcuts now work on Russian, Greek and other non-Latin keyboard layouts on Windows and Linux
+- Untracked symbolic links no longer inflate the Changes line counts, and a link to a named pipe no longer freezes the Changes view.
+- Web fetch rows now keep code in angle brackets, such as `<dialog>` or `Vec<T>`, in the page title instead of dropping it.
+- When a hook blocks your prompt, the chat now shows a notice with the hook's reason instead of leaving the message looking sent with no reply.
+- When a message fails to send because a session takes too long to resume, your text and attachments are now restored to the composer instead of being lost.
+- When a model declines a request on content policy grounds and the session moves to a fallback model, the transcript now says why ("Content policy refusal. Model changed from … to …").
+- When the agent moves or renames a file, the chat now shows it as "Move `<new name>`", opens the new path, and says "File renamed without changes" for a pure rename instead of showing an edit of the old file.
+- When the agent renames a worktree session's branch to a name longer than 40 characters, the rename is now refused with a message so the agent can pick a shorter name, instead of silently cutting the branch name mid-word.
+
 ## v1.1.35
 
 ### Highlights
