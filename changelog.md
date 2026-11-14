@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.2
+
+### Fixed
+
+- Fixed sessions failing to start or resume with "Session plugin inputs changed during reload" when your organization's policy turns off Computer Use while it is turned on in your settings.
+
 ## v1.4.1
 
 ### Fixed
