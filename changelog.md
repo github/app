@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.4.1
+
+### Fixed
+
+- Sessions no longer hang while starting when another Copilot process holds the shared log lock; the runtime now skips file logging after a short wait and starts normally
+
 ## v1.4.0
 
 ### Highlights
