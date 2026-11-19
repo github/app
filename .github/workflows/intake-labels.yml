@@ -1,0 +1,29 @@
+name: Label issues for intake
+
+on:
+  issues:
+    types: [opened, reopened, unlabeled]
+
+permissions:
+  issues: write
+
+jobs:
+  label:
+    if: >-
+      github.event.action == 'opened' ||
+      github.event.action == 'reopened' ||
+      (github.event.action == 'unlabeled' &&
+        (github.event.label.name == 'need-info' ||
+         github.event.label.name == 'needs more info'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Add needs-intake label
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              ...context.repo,
+              issue_number: context.issue.number,
+              labels: ['needs-intake'],
+            });
