@@ -1,5 +1,135 @@
 # Changelog
 
+## v1.5.0
+
+### Highlights
+
+- The agent can draw interactive charts inline in the conversation when a visual helps explain data, and saves each chart to the Library.
+- Browse images and videos in pull request and issue descriptions and comments as a gallery, using previous/next buttons or arrow keys.
+- Image previews are now available in workspace and pull request diffs for all users.
+- Issue and pull request conversations now show embedded GitHub code snippets.
+- In local sessions, the agent can now ask several questions at once and you answer them together in a single card.
+
+### Added
+
+- Added a `github session new` command that starts a new session in the running app from your terminal, without a confirmation prompt.
+- Browse images and videos in pull request and issue descriptions and comments as a gallery, using previous/next buttons or arrow keys
+- Image previews are now available in workspace and pull request diffs for all users.
+- Issue and pull request conversations now show embedded GitHub code snippets.
+- Library files now appear in the prompt composer's file mention picker, so you can reference them with @.
+- Start, stop, restart, and view logs for a session's run scripts from the Run submenu in a Project Overview session's context menu
+- The agent can draw interactive charts inline in the conversation when a visual helps explain data, and saves each chart to the Library
+- The pull request activity feed scrollbar now shows review submissions, and selecting a segment jumps to that review.
+
+### Changed
+
+- Agent questions you put on hold now appear as a compact pill above the composer instead of a full-width bar; select it to bring the questions back.
+- Browser Use approval prompts now appear in the app instead of via the browser extension. Prompts are shown regardless of your tool permission setting, and Browser Use is not yet available in Autopilot.
+- Charts in replies now blend into the conversation without a bordered card or duplicate title, and their toolbar appears on hover
+- Clicking a video in Markdown now opens it in the media gallery and starts playback, replacing the separate maximize button.
+- Commit titles in the Changes tab's commits menu now show on up to two lines, so similar commits are easier to tell apart.
+- Creating a pull request can now be requested while changes are still being checked; it starts automatically once the check finishes.
+- Extension slash commands such as /eval are now labeled as commands in the composer menu and appear as distinct command bubbles in the conversation, with details available on click.
+- In local sessions, the agent can now ask several questions at once and you answer them together in a single card.
+- Issue and pull request description editors now render footnotes, collapsible sections and Mermaid diagrams, add a right-click formatting menu, and preserve extra blank lines when switching between Live and Raw modes and saving.
+- Jumping to a prompt from the conversation timeline now places it at the top of the chat instead of the middle, so the timeline highlight and keyboard navigation stay in step with what's on screen.
+- Large pasted text now appears as an inline pill in the prompt and is sent as part of the message instead of being converted into an attachment
+- Loading complete conversation history no longer requires confirmation, including Find, exports, and history recovery.
+- Pick-one and yes/no questions from the agent are now answered with a single click, and their tiles are round for pick-one and square for pick-any so you can tell which kind of question it is.
+- Simplified the workspace diff scope menu by grouping related views with separators and removing the redundant Last commit shortcut
+- The slash command picker now suggests and narrows the subcommands listed in a skill's argument hint as you type.
+- The workspace and pull request commit pickers are now a single searchable list with one-line commit rows showing the short SHA, title, and added/removed line counts, plus simpler workspace scope options (All changes, Committed, Uncommitted).
+- When automatic plugin updates are turned on, installed marketplace plugins are checked every 6 hours and only plugins with a newer version are reinstalled.
+- When the agent asks several questions in a form, its message now appears in full in the chat and the question card shows only the questions. Cancelled and Autopilot-declined forms are labelled clearly in the transcript.
+- You can now put the agent's questions on hold with Esc to reply in the composer instead, and the question card's keys are safer: Enter, Space and option letters only pick an answer, while Cmd+Enter moves on.
+
+### Fixed
+
+- A Side chat quote removed and then restored with undo is now sent with its highlight in the original reply.
+- A Side chat that was still starting in an Agent session when the app quit unexpectedly is no longer left in that session's Side chats
+- A slow settings read while starting a session no longer interrupts your other active sessions
+- Adding a recommended MCP server from Customize now moves keyboard focus to the new server's status, or announces it to screen readers, instead of leaving focus on a different server.
+- After a folder delete in the Files panel fails partway, the panel now refreshes to show what is left instead of listing files that were already deleted, and no longer says the folder was restored.
+- Attached BMP and TIFF images (and HEIC photos on macOS) are now converted so the model can read them instead of being dropped
+- Background conversation compaction no longer replaces the running turn's progress with "Compacting conversation…" while a long tool or subagent is running
+- Browse and search in Customize now list an organization-managed plugin once, and no longer offer plugins your organization's policy disables.
+- Clicking a pull request or issue chip in a message you sent in a standalone chat now opens it in the side panel instead of navigating away from the chat
+- Copying an inline code span from a conversation no longer includes Markdown backticks around the text
+- Creating several local worktrees at once no longer assigns them the same folder, which could cause deleting one workspace to remove another workspace's files.
+- Customize now accepts MCP server names such as `com.atlassian/atlassian-mcp-server-v2`, and servers added from the registry are saved under their registry names.
+- Dropping an image anywhere on the New view now adds it to the composer, not just when dropped on the composer itself
+- Files you collapse in the diff view now stay collapsed when the diff refreshes
+- Find in a chat no longer counts matches inside math expressions or emoji shortcodes that aren't shown as text, so the match counter agrees with what is highlighted.
+- Fixed a duplicate scope selector briefly appearing next to the Commits menu in the Changes view while commits load.
+- Fixed creating several local sessions at the same time sometimes failing with an "already exists" error when they picked the same branch name.
+- Fixed image uploads in pull request descriptions and comments failing for fork-based pull requests when you can edit the pull request but cannot push to its base repository.
+- Fixed inline MCP App views failing to load on macOS with "This app didn't start."
+- Fixed lag after switching away from a session that was still loading its conversation history
+- Fixed macOS inline predictive text still completing words in chat when answering an agent's question, suggesting plan changes, or telling Copilot what to do instead of a denied action.
+- Fixed persistent Projects in autopilot repeating the same answer twice after each reply.
+- Fixed prompt editor crashes when pasting malformed tables and when code blocks were highlighted
+- Fixed remote access creating duplicate environments and losing remote sessions after the app restarts.
+- Fixed startup replacing your session database with an older backup when the disk was full or the database was temporarily unreadable, which could make recent sessions disappear
+- Fixed the composer mic button showing "Voice mode is busy" after a dictation shortcut session ended early, such as by switching to another app.
+- Fixed the discard confirmation for files with long names so it no longer overflows the dialog or overlaps the close button
+- Fixed the previous and next arrows on agent question cards sometimes ignoring quick successive clicks
+- Follow-up messages sent to a busy session are now delivered normally instead of sometimes failing with "Message not sent" when the session is slow to respond.
+- GitHub request error messages, such as the one shown when starring a repository fails, no longer repeat the "GitHub API request failed" prefix twice.
+- In Assisted mode, a session an agent creates without a first message now starts in Assisted instead of the project default.
+- In Customize, the Browse skills, canvases, plugins and extensions actions now leave keyboard focus on the Browse tab instead of dropping it to the page
+- Inline math typed in the composer, such as $\log x$ or $a_{n+1}$, is now sent exactly as typed instead of with extra escape characters that broke its rendering.
+- Installing a plugin from a private marketplace that isn't added yet now prompts you to sign in instead of failing with an install error.
+- Keyboard focus now moves to the new automation in the Automations overview after choosing Create and run.
+- Library cards for local Markdown, text, code, CSV, HTML, PDF and Office files now update their preview, modified time and position when the file changes on disk
+- Long chats now keep their Background pill and running background agents and shells after a window reload or app relaunch
+- Long chats now keep their folder after a window reload or when reopened from the sidebar, so the title menu's Path item (Copy path, Show in file manager) stays available.
+- Long links in earlier prompts no longer overflow the conversation timeline preview card
+- Long prompt sources in the link confirmation dialog now use the full dialog width instead of being squeezed into a narrow column.
+- Low-disk warnings now check the drive that holds your configured storage location instead of the drive containing the Copilot home folder.
+- Markdown files in a repository's Code tab, including the README, no longer turn text such as shell variables ($HOME/bin) into math, matching how github.com renders them.
+- Nested AGENTS.md and CLAUDE.md files in subdirectories are now included as custom instructions in sessions.
+- On Windows, the app now reopens after a silent or passive upgrade that had to close it.
+- Opening a kept chat whose cloud sandbox was deleted now says the session is unavailable instead of showing a generic restore failure with a Retry button.
+- Pasting a file path containing double underscores into the prompt composer no longer strips the underscores, so the file mention finds the right file.
+- Pasting a file path that contains a session ID into the prompt composer no longer replaces part of the path with a session reference
+- Pasting a pull request or issue URL from another repository into Create from now opens the intended resource, offering to add the repository if needed, instead of showing a misleading branch-name error.
+- Permission approval cards in the conversation now scroll when the window is short or zoomed in, so you can always read the title and all requested paths before approving.
+- Project rows in the sidebar now keep the unread dot visible while the Project or one of its sub-agents is working.
+- Pull request and issue links on your GitHub Enterprise Cloud (ghe.com) host now open in the side panel instead of the browser
+- Questions from the agent now label its suggested option "Recommended" instead of "Default", and the Skip and Send buttons are sized to fit their text.
+- Reopening very large sessions no longer leaves "Loading history…" showing after recent messages appear; older messages load as you scroll up.
+- Repository hooks in `.github/hooks` now run in new worktree sessions for trusted repositories that have no extensions.
+- Resizing the window no longer shifts the chat away from the reply you were reading after you scroll up
+- Resizing the window while reading a long chat no longer jumps the view toward the top, and returning to a chat you left part way up no longer freezes the window briefly.
+- Response details now show the model used for a response after a conversation is restored from history.
+- Scrolling a diff with line wrap on no longer stalls briefly when rows contain non-ASCII characters such as em dashes, curly quotes, CJK or emoji text
+- Scrolling a long Manage sessions list is smoother after clicking Show all.
+- Scrolling quickly to the top of a long session no longer loads two pages of older history or jumps you away from where you were reading
+- Scrolling up a chat with long replies no longer leaves the transcript blank until you stop scrolling, and a chat you scrolled part way up keeps its place when you switch away and back
+- Session previews no longer repeat the environment type for SSH and WSL environments that still have the name they were added with, so they read SSH · devbox instead of SSH · SSH: devbox
+- Sessions an agent starts with a first prompt now appear in the sidebar even if you stop the agent's turn before that prompt is accepted
+- Sessions started by an agent with a custom agent now use the model that agent specifies, unless a model is explicitly chosen.
+- Settings panels such as Accounts now appear immediately the first time Settings opens, instead of staying blank for a third of a second.
+- Showing the Library's Folders layout with hundreds of saved files is much faster and no longer stalls the panel.
+- Staff can opt in to Automation run session UI in Experimental settings to inspect Changes, continue completed runs, and keep runs out of the sidebar until choosing Open in session. The setting is off by default.
+- Stopping a manual /compact now shows "Compaction cancelled." instead of "Compaction failed." in the chat and copied transcript
+- The /side command now works in standalone chats, opening a Side chat with an optional starting prompt.
+- The composer's @ file menu now lists the workspace's current files each time it opens, so files created or deleted outside the app are reflected.
+- The Environments page no longer shows a "Couldn't load environments" error on Windows machines without WSL; it shows the normal empty state instead.
+- The Files panel now explains why a name like ".", ".." or one containing a tab is refused, instead of wrongly saying it contains slashes
+- The thinking preview no longer cuts off at abbreviations such as "vs.", "e.g." or "Dr." and now shows the full first sentence.
+- Turning off Copilot Fusion now restores your preferred model, reasoning effort, and context tier instead of picking a recent or first available model
+- Typing `@` followed by a top-level folder named like the project (such as `@django/core`) now searches that folder instead of attaching an unrelated folder.
+- Typing in Go to file (Ctrl/Cmd+P) no longer lags in workspaces with tens of thousands of files.
+- When a model call fails partway through a reply and is retried, the partial text no longer merges into the retried reply. The partial text now shows in its own row marked "Incomplete response".
+- With Assisted Permissions as your default, automation runs now start in Assisted instead of sometimes running with Allow All.
+- With Assisted Permissions, an automation prompt that an agent saves directly now gets the usual permission check.
+- You can now add an SSH environment from Settings while environment discovery is still loading.
+
+### Removed
+
+- Removed confetti animations from Home celebrations and completed session todos.
+
 ## v1.4.2
 
 ### Fixed
